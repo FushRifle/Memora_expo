@@ -3,7 +3,6 @@ import { HomeHeader } from '@/components/Home/Header'
 import { HeroCard } from '@/components/Home/HeroCard'
 import { QuickActions } from '@/components/Home/QuickActions'
 import { RecentActivity } from '@/components/Home/Activity'
-import { AIAssistantCard } from '@/components/Home/AssistantCard'
 import { useRecentActivity } from '@/hook/useRecentActivity'
 import { StudyCalendar } from '@/components/Home/Events'
 
@@ -17,14 +16,7 @@ export default function HomeScreen() {
                 <QuickActions />
                 <HeroCard />
                 <StudyCalendar />
-                <YStack space="$3" mt="$4">
-                    <Text fontWeight="bold" color="$color2">
-                        Recent Activity
-                    </Text>
-                    <RecentActivity loading={loading} activities={recentActivity} />
-                </YStack>
-
-                <AIAssistantCard />
+                <RecentActivity />
             </YStack>
         </ScrollView>
     )
