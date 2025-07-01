@@ -1,3 +1,5 @@
 npx expo install @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-async-storage/async-storage expo-document-picker expo-speech expo-av
 npx expo install victory-native
 Install react-native-dotenv: npx expo install react-native-dotenv
+
+npm install react-native-svg@15.11.2

@@ -1,87 +1,61 @@
-import { YStack, XStack, Input, Button, Text, ScrollView, Spinner } from 'tamagui'
-import { Plus, ChevronRight } from '@tamagui/lucide-icons'
-import { useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { generateFlashcards } from '@/app/services/AIServices'
-
-// ⚡ import correct types
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
-
-// Define the type of params for the stack
-type RootStackParamList = {
-    FlashcardViewer: { flashcards: string } // we pass flashcards as JSON string
-    // add other screens if needed
-}
-
-// Get the correct navigation prop
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'FlashcardViewer'>
+import React, { useState } from 'react'
+import { YStack, Text, Input, Button, ScrollView } from 'tamagui'
+import { useTheme } from '@/styles/ThemeContext'
 
 export function FlashcardGeneratorScreen() {
-    const [topic, setTopic] = useState('')
-    const [isGenerating, setIsGenerating] = useState(false)
-    const [recentTopics, setRecentTopics] = useState<string[]>([])
+    const { colors } = useTheme()
+    const [question, setQuestion] = useState('')
+    const [answer, setAnswer] = useState('')
+    const [flashcards, setFlashcards] = useState<{ question: string; answer: string }[]>([])
 
-    const navigation = useNavigation<NavigationProp>()
-
-    const handleGenerate = async () => {
-        if (!topic.trim()) return
-
-        setIsGenerating(true)
-        try {
-            // Call AI service to generate flashcards
-            const flashcards = await generateFlashcards(topic)
-
-            // Update recent topics (max 5)
-            setRecentTopics(prev => [topic, ...prev.filter(t => t !== topic)].slice(0, 5))
-
-            // Navigate to flashcard viewer screen
-            navigation.navigate('FlashcardViewer', { flashcards: JSON.stringify(flashcards) })
-        } catch (error) {
-            console.error('Failed to generate flashcards:', error)
-        } finally {
-            setIsGenerating(false)
+    const addFlashcard = () => {
+        if (question.trim() && answer.trim()) {
+            setFlashcards((prev) => [...prev, { question, answer }])
+            setQuestion('')
+            setAnswer('')
         }
     }
 
     return (
-        <ScrollView p="$4">
-            <YStack space="$4">
-                <Text fontSize="$8" fontWeight="bold">Flashcard Generator</Text>
+        <YStack flex={1} p="$4" space="$4" backgroundColor={colors.background}>
+            <Text fontWeight="bold" fontSize={20} color={colors.text}>
+                Create Flashcards
+            </Text>
 
-                <YStack space="$3">
-                    <Text>Enter a topic to generate flashcards:</Text>
-                    <XStack space="$3">
-                        <Input
-                            f={1}
-                            placeholder="e.g. Photosynthesis, Calculus Derivatives"
-                            value={topic}
-                            onChangeText={setTopic}
-                        />
-                        <Button
-                            icon={isGenerating ? <Spinner /> : <Plus />}
-                            onPress={handleGenerate}
-                            disabled={isGenerating}
-                        />
-                    </XStack>
-                </YStack>
+            <Input
+                placeholder="Enter question"
+                value={question}
+                onChangeText={setQuestion}
+                backgroundColor={colors.inputBackground}
+                color={colors.text}
+            />
+            <Input
+                placeholder="Enter answer"
+                value={answer}
+                onChangeText={setAnswer}
+                backgroundColor={colors.inputBackground}
+                color={colors.text}
+            />
+            <Button theme="accent" onPress={addFlashcard}>
+                Add Flashcard
+            </Button>
 
-                {recentTopics.length > 0 && (
-                    <YStack space="$3">
-                        <Text fontSize="$6" color="$color2">Recent Topics</Text>
-                        {recentTopics.map((item, index) => (
-                            <Button
-                                key={index}
-                                onPress={() => setTopic(item)}
-                                theme="alt2"
-                                jc="space-between"
-                                iconAfter={<ChevronRight />}
-                            >
-                                {item}
-                            </Button>
-                        ))}
+            <ScrollView>
+                {flashcards.map((card, index) => (
+                    <YStack
+                        key={index}
+                        backgroundColor={colors.cardBackground}
+                        borderRadius={8}
+                        padding="$3"
+                        marginBottom="$3"
+                    >
+                        <Text fontWeight="700" color={colors.accent}>
+                            Q: {card.question}
+                        </Text>
+                        <Text color={colors.textSecondary}>A: {card.answer}</Text>
                     </YStack>
-                )}
-            </YStack>
-        </ScrollView>
+                ))}
+            </ScrollView>
+        </YStack>
     )
 }

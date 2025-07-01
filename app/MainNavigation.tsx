@@ -1,16 +1,15 @@
-// navigation/MainNavigation.tsx
+import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '@/screens/dashboard/HomeScreen'
-import { FlashcardGeneratorScreen } from '@/screens/dashboard/FlashCardGeneratorScreen'
+import { FlashcardGeneratorScreen } from '@/screens/dashboard/FlashcardGeneratorScreen'
 import { DocumentAnalysisScreen } from '@/screens/dashboard/DocumentAnalysisScreen'
-import { StudyAnalyticsScreen } from '@/screens/dashboard/StudyAnalyticScreen'
+import { StudyAnalyticsScreen } from '@/screens/dashboard/StudyAnalyticsScreen'
 import { VoiceAssistantScreen } from '@/screens/dashboard/VoiceAssistantScreen'
-import { FlashcardViewerScreen } from '@/screens/dashboard/FlashCardViewerScreen'
+import { FlashcardViewerScreen } from '@/screens/dashboard/FlashcardViewerScreen'
 import DocumentResultScreen from '@/screens/dashboard/DocumentResultScreen'
-import { Home, BookOpen, Bot, BarChart2 } from '@tamagui/lucide-icons'
+import { Home, BookOpen, Bot, BarChart2, FileText } from '@tamagui/lucide-icons'
 import { useSafeTheme } from '@/hook/theme/useTheme'
-import React from 'react'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -21,17 +20,12 @@ function MainTabs() {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarActiveTintColor: theme.accent.val,
-                tabBarInactiveTintColor: theme.color2.val,
+                headerShown: false, // hide header on all tabs
+                tabBarActiveTintColor: theme.colors.accent as string,
+                tabBarInactiveTintColor: theme.colors.textSecondary as string,
                 tabBarStyle: {
-                    backgroundColor: theme.bg.val,
-                    borderTopColor: theme.bg2.val,
-                },
-                headerStyle: {
-                    backgroundColor: theme.bg.val,
-                },
-                headerTitleStyle: {
-                    color: theme.color.val,
+                    backgroundColor: theme.colors.background as string,
+                    borderTopColor: theme.colors.cardBackground as string,
                 },
             }}
         >
@@ -53,7 +47,7 @@ function MainTabs() {
                 name="Documents"
                 component={DocumentAnalysisScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <BookOpen color={color} />,
+                    tabBarIcon: ({ color }) => <FileText color={color} />,
                 }}
             />
             <Tab.Screen
@@ -76,22 +70,12 @@ function MainTabs() {
 
 export function MainNavigation() {
     return (
-        <Stack.Navigator>
-            <Stack.Screen
-                name="MainTabs"
-                component={MainTabs}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="FlashcardViewer"
-                component={FlashcardViewerScreen}
-                options={{ title: 'Flashcards' }}
-            />
-            <Stack.Screen
-                name="DocumentResult"
-                component={DocumentResultScreen}
-                options={{ title: 'Analysis Results' }}
-            />
+        <Stack.Navigator
+            screenOptions={{ headerShown: false }}
+        >
+            <Stack.Screen name="MainTabs" component={MainTabs} />
+            <Stack.Screen name="FlashcardViewer" component={FlashcardViewerScreen} />
+            <Stack.Screen name="DocumentResult" component={DocumentResultScreen} />
         </Stack.Navigator>
     )
 }

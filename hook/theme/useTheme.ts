@@ -1,13 +1,12 @@
-// hooks/useSafeTheme.ts
-import { useTheme, Theme } from 'tamagui'
+// hooks/useSafeTheme.ts (now uses your custom ThemeProvider)
+import { useTheme as useAppTheme } from '@/styles/ThemeContext'
 
-export const useSafeTheme = (): Theme => {
-    const theme = useTheme()
+export const useSafeTheme = () => {
+    const theme = useAppTheme()
 
-    if (!theme.accent || !theme.bg || !theme.color) {
+    if (!theme?.colors || !theme?.colors.primary || !theme?.colors.background) {
         throw new Error(
-            'Required theme properties are missing. ' +
-            'Make sure your theme defines accent, bg, and color properties.'
+            'Missing theme colors. Make sure ThemeProvider is mounted properly.'
         )
     }
 

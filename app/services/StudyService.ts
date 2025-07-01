@@ -1,4 +1,4 @@
-import { MMKV } from 'react-native-mmkv'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 type StudyData = {
     date: string
@@ -6,9 +6,6 @@ type StudyData = {
     subject: string
     score?: number
 }
-
-// Create a storage instance
-const storage = new MMKV()
 
 /**
  * Get study data (mock generator in this example)
@@ -39,18 +36,18 @@ export const getStudyData = async (): Promise<StudyData[]> => {
 }
 
 /**
- * Save a new study session into local MMKV storage
+ * Save a new study session into local AsyncStorage
  */
-export const saveStudySession = (session: Omit<StudyData, 'date'>): void => {
+export const saveStudySession = async (session: Omit<StudyData, 'date'>): Promise<void> => {
     try {
         const date = new Date().toISOString()
         const key = 'studySessions'
 
-        const raw = storage.getString(key)
+        const raw = await AsyncStorage.getItem(key)
         const parsed: StudyData[] = raw ? JSON.parse(raw) : []
 
         const newSessions = [...parsed, { ...session, date }]
-        storage.set(key, JSON.stringify(newSessions))
+        await AsyncStorage.setItem(key, JSON.stringify(newSessions))
     } catch (error) {
         console.error('Failed to save study session:', error)
     }
@@ -59,9 +56,9 @@ export const saveStudySession = (session: Omit<StudyData, 'date'>): void => {
 /**
  * Get recent N study sessions, sorted newest → oldest
  */
-export const getRecentActivity = (count: number = 5): StudyData[] => {
+export const getRecentActivity = async (count: number = 5): Promise<StudyData[]> => {
     try {
-        const raw = storage.getString('studySessions')
+        const raw = await AsyncStorage.getItem('studySessions')
         const sessions: StudyData[] = raw ? JSON.parse(raw) : []
 
         // Sort by date descending

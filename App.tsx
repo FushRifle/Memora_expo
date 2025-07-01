@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { MainNavigation } from '@/app/MainNavigation'
 import { NavigationContainer } from '@react-navigation/native'
+import { ThemeProvider } from '@/styles/ThemeContext'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -28,14 +29,14 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <TamaguiProvider config={config}>
-        <Theme name="memoradark_blue">
+        <ThemeProvider>
           <SafeAreaProvider>
             <StatusBar style="light" />
             <NavigationContainer>
               <MainNavigation />
             </NavigationContainer>
           </SafeAreaProvider>
-        </Theme>
+        </ThemeProvider>
       </TamaguiProvider>
     </GestureHandlerRootView>
   )
