@@ -136,7 +136,7 @@ export const HeroCard = () => {
                             pressStyle={{ backgroundColor: '#1565c0' }}
                         >
                             <Text color="white" fontWeight="600" fontSize={14}>
-                                Explore Features
+                                Chat With Memora
                             </Text>
                         </Button>
                     </XStack>

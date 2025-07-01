@@ -5,7 +5,7 @@ import HomeScreen from '@/screens/dashboard/HomeScreen'
 import { FlashcardGeneratorScreen } from '@/screens/dashboard/FlashcardGeneratorScreen'
 import { DocumentAnalysisScreen } from '@/screens/dashboard/DocumentAnalysisScreen'
 import { StudyAnalyticsScreen } from '@/screens/dashboard/StudyAnalyticsScreen'
-import { VoiceAssistantScreen } from '@/screens/dashboard/VoiceAssistantScreen'
+import { AIChatScreen } from '@/screens/dashboard/AIChatScreen'
 import { FlashcardViewerScreen } from '@/screens/dashboard/FlashcardViewerScreen'
 import DocumentResultScreen from '@/screens/dashboard/DocumentResultScreen'
 import { Home, BookOpen, Bot, BarChart2, FileText } from '@tamagui/lucide-icons'
@@ -20,7 +20,7 @@ function MainTabs() {
     return (
         <Tab.Navigator
             screenOptions={{
-                headerShown: false, // hide header on all tabs
+                headerShown: false,
                 tabBarActiveTintColor: theme.colors.accent as string,
                 tabBarInactiveTintColor: theme.colors.textSecondary as string,
                 tabBarStyle: {
@@ -58,8 +58,8 @@ function MainTabs() {
                 }}
             />
             <Tab.Screen
-                name="Voice"
-                component={VoiceAssistantScreen}
+                name="AI Chat"
+                component={AIChatScreen}   // <-- updated
                 options={{
                     tabBarIcon: ({ color }) => <Bot color={color} />,
                 }}
@@ -70,9 +70,7 @@ function MainTabs() {
 
 export function MainNavigation() {
     return (
-        <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-        >
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="MainTabs" component={MainTabs} />
             <Stack.Screen name="FlashcardViewer" component={FlashcardViewerScreen} />
             <Stack.Screen name="DocumentResult" component={DocumentResultScreen} />

@@ -1,60 +1,97 @@
 import React, { useState } from 'react'
-import { YStack, Text, Input, Button, ScrollView } from 'tamagui'
-import { useTheme } from '@/styles/ThemeContext'
+import { YStack, ScrollView } from 'tamagui'
+import { FlashcardHeader } from '@/components/Flashcards/Header'
+import { FlashcardTabs } from '@/components/Flashcards/Tabs'
+import { FlashcardForm } from '@/components/Flashcards/Form'
+import { FlashcardList } from '@/components/Flashcards/CardList'
+import { FlashcardPreview } from '@/components/Flashcards/CardPreview'
+import { FlashcardStudy } from '@/components/Flashcards/CardStudy'
 
 export function FlashcardGeneratorScreen() {
-    const { colors } = useTheme()
+    const [activeTab, setActiveTab] = useState('create')
     const [question, setQuestion] = useState('')
     const [answer, setAnswer] = useState('')
-    const [flashcards, setFlashcards] = useState<{ question: string; answer: string }[]>([])
+    const [category, setCategory] = useState('General')
+    const [difficulty, setDifficulty] = useState('medium')
+    const [flashcards, setFlashcards] = useState<any[]>([])
+    const [isEditing, setIsEditing] = useState<string | null>(null)
 
     const addFlashcard = () => {
         if (question.trim() && answer.trim()) {
-            setFlashcards((prev) => [...prev, { question, answer }])
-            setQuestion('')
-            setAnswer('')
+            const newFlashcard = {
+                id: Date.now().toString(),
+                question,
+                answer,
+                category,
+                difficulty
+            }
+            setFlashcards(prev => [...prev, newFlashcard])
+            resetForm()
         }
     }
 
+    const updateFlashcard = () => {
+        if (isEditing && question.trim() && answer.trim()) {
+            setFlashcards(prev => prev.map(card =>
+                card.id === isEditing ? { ...card, question, answer, category, difficulty } : card
+            ))
+            resetForm()
+        }
+    }
+
+    const resetForm = () => {
+        setQuestion('')
+        setAnswer('')
+        setCategory('General')
+        setDifficulty('medium')
+        setIsEditing(null)
+    }
+
+    const editFlashcard = (card: any) => {
+        setQuestion(card.question)
+        setAnswer(card.answer)
+        setCategory(card.category)
+        setDifficulty(card.difficulty)
+        setIsEditing(card.id)
+    }
+
+    const deleteFlashcard = (id: string) => {
+        setFlashcards(prev => prev.filter(card => card.id !== id))
+        if (isEditing === id) resetForm()
+    }
+
     return (
-        <YStack flex={1} p="$4" space="$4" backgroundColor={colors.background}>
-            <Text fontWeight="bold" fontSize={20} color={colors.text}>
-                Create Flashcards
-            </Text>
+        <YStack flex={1} backgroundColor="#f5f5f5">
+            <FlashcardHeader />
+            <FlashcardTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-            <Input
-                placeholder="Enter question"
-                value={question}
-                onChangeText={setQuestion}
-                backgroundColor={colors.inputBackground}
-                color={colors.text}
-            />
-            <Input
-                placeholder="Enter answer"
-                value={answer}
-                onChangeText={setAnswer}
-                backgroundColor={colors.inputBackground}
-                color={colors.text}
-            />
-            <Button theme="accent" onPress={addFlashcard}>
-                Add Flashcard
-            </Button>
-
-            <ScrollView>
-                {flashcards.map((card, index) => (
-                    <YStack
-                        key={index}
-                        backgroundColor={colors.cardBackground}
-                        borderRadius={8}
-                        padding="$3"
-                        marginBottom="$3"
-                    >
-                        <Text fontWeight="700" color={colors.accent}>
-                            Q: {card.question}
-                        </Text>
-                        <Text color={colors.textSecondary}>A: {card.answer}</Text>
+            <ScrollView p="$4">
+                {activeTab === 'create' && (
+                    <YStack space="$4">
+                        <FlashcardForm
+                            question={question}
+                            setQuestion={setQuestion}
+                            answer={answer}
+                            setAnswer={setAnswer}
+                            category={category}
+                            setCategory={setCategory}
+                            difficulty={difficulty}
+                            setDifficulty={setDifficulty}
+                            isEditing={isEditing as any}
+                            addFlashcard={addFlashcard}
+                            updateFlashcard={updateFlashcard}
+                            resetForm={resetForm}
+                        />
+                        <FlashcardList
+                            flashcards={flashcards}
+                            editFlashcard={editFlashcard}
+                            deleteFlashcard={deleteFlashcard}
+                        />
                     </YStack>
-                ))}
+                )}
+
+                {activeTab === 'preview' && <FlashcardPreview />}
+                {activeTab === 'study' && <FlashcardStudy flashcards={flashcards} />}
             </ScrollView>
         </YStack>
     )

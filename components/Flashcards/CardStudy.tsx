@@ -1,0 +1,107 @@
+import { YStack, Text, Card, XStack, Button, Stack } from 'tamagui'
+import { FlipHorizontal, Shuffle } from '@tamagui/lucide-icons'
+import { useState } from 'react'
+
+export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [isFlipped, setIsFlipped] = useState(false)
+
+    const mockFlashcards = [
+        { id: '1', question: 'What is the capital of France?', answer: 'Paris' },
+        { id: '2', question: 'Solve for x: 2x + 5 = 15', answer: 'x = 5' },
+    ]
+
+    const currentCard = flashcards.length ? flashcards[currentIndex] : mockFlashcards[currentIndex]
+
+    return (
+        <YStack space="$4" marginBottom="$9">
+            <Text fontWeight="600" color="#1976d2">Study Mode</Text>
+
+            <Card
+                backgroundColor="white"
+                p="$4"
+                borderWidth={1}
+                borderColor="#e0e0e0"
+                elevation={1}
+            >
+                <YStack space="$3" ai="center">
+                    <Text fontSize="$7" fontWeight="700" color="#1976d2">
+                        Flashcard {currentIndex + 1}/{flashcards.length || mockFlashcards.length}
+                    </Text>
+
+                    <Card
+                        width="100%"
+                        minHeight={250}
+                        ai="center"
+                        jc="center"
+                        backgroundColor="#e3f2fd"
+                        p="$5"
+                        borderWidth={1}
+                        borderColor="#bbdefb"
+                        onPress={() => setIsFlipped(!isFlipped)}
+                    >
+                        <Text fontSize="$6" textAlign="center" color="#0d47a1">
+                            {isFlipped ? currentCard.answer : currentCard.question}
+                        </Text>
+                    </Card>
+
+                    <XStack space="$3" mt="$3">
+                        <Button
+                            icon={<Shuffle size={16} color="#1976d2" />}
+                            borderWidth={1}
+                            borderColor="#e0e0e0"
+                            backgroundColor="white"
+                        >
+                            <Text color="#1976d2">Shuffle</Text>
+                        </Button>
+                        <Button
+                            icon={<FlipHorizontal size={16} color="#1976d2" />}
+                            borderWidth={1}
+                            borderColor="#e0e0e0"
+                            backgroundColor="white"
+                            onPress={() => setIsFlipped(!isFlipped)}
+                        >
+                            <Text color="#1976d2">Flip</Text>
+                        </Button>
+                    </XStack>
+
+                    <XStack space="$3" mt="$4">
+                        <Button
+                            backgroundColor="#f44336"
+                            flex={1}
+                        >
+                            <Text color="white">Incorrect</Text>
+                        </Button>
+                        <Button
+                            backgroundColor="#4caf50"
+                            flex={1}
+                        >
+                            <Text color="white">Correct</Text>
+                        </Button>
+                    </XStack>
+                </YStack>
+            </Card>
+
+            <YStack space="$3" mt="$4">
+                <Text fontWeight="600" color="#1976d2">Study Progress</Text>
+                <Card
+                    backgroundColor="white"
+                    p="$4"
+                    borderWidth={1}
+                    borderColor="#e0e0e0"
+                    elevation={1}
+                >
+                    <YStack space="$2">
+                        <XStack jc="space-between">
+                            <Text color="#616161">Mastered</Text>
+                            <Text fontWeight="600">0% (0/0)</Text>
+                        </XStack>
+                        <Stack height={8} backgroundColor="#e0e0e0" borderRadius={4}>
+                            <Stack width="0%" height={8} backgroundColor="#4caf50" borderRadius={4} />
+                        </Stack>
+                    </YStack>
+                </Card>
+            </YStack>
+        </YStack>
+    )
+}
