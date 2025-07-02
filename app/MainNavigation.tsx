@@ -3,13 +3,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '@/screens/dashboard/HomeScreen'
 import { FlashcardGeneratorScreen } from '@/screens/dashboard/FlashcardGeneratorScreen'
-import { DocumentAnalysisScreen } from '@/screens/dashboard/DocumentAnalysisScreen'
+import { DocumentsScreen } from '@/screens/dashboard/DocumentAnalysisScreen'
 import { StudyAnalyticsScreen } from '@/screens/dashboard/StudyAnalyticsScreen'
 import { AIChatScreen } from '@/screens/dashboard/AIChatScreen'
 import { FlashcardViewerScreen } from '@/screens/dashboard/FlashcardViewerScreen'
 import DocumentResultScreen from '@/screens/dashboard/DocumentResultScreen'
-import { Home, BookOpen, Bot, BarChart2, FileText } from '@tamagui/lucide-icons'
+import { Home, BookOpen, Bot, GraduationCap, FileText } from '@tamagui/lucide-icons'
 import { useSafeTheme } from '@/hook/theme/useTheme'
+import CoursesScreen from '@/screens/dashboard/CourseScreen'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -44,17 +45,17 @@ function MainTabs() {
                 }}
             />
             <Tab.Screen
-                name="Documents"
-                component={DocumentAnalysisScreen}
+                name="Courses"
+                component={CoursesScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <FileText color={color} />,
+                    tabBarIcon: ({ color }) => <GraduationCap color={color} />,
                 }}
             />
             <Tab.Screen
-                name="Analytics"
-                component={StudyAnalyticsScreen}
+                name="Documents"
+                component={DocumentsScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <BarChart2 color={color} />,
+                    tabBarIcon: ({ color }) => <FileText color={color} />,
                 }}
             />
             <Tab.Screen
@@ -74,6 +75,7 @@ export function MainNavigation() {
             <Stack.Screen name="MainTabs" component={MainTabs} />
             <Stack.Screen name="FlashcardViewer" component={FlashcardViewerScreen} />
             <Stack.Screen name="DocumentResult" component={DocumentResultScreen} />
+            <Stack.Screen name="Analytics" component={StudyAnalyticsScreen} />
         </Stack.Navigator>
     )
 }

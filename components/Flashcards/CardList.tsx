@@ -11,13 +11,13 @@ export const FlashcardList = ({
     deleteFlashcard: (id: string) => void
 }) => {
     return (
-        <YStack space="$3" mt="$4">
-            <Text fontWeight="600" color="#1976d2">
+        <YStack space="$4" mt="$4">
+            <Text fontWeight="700" fontSize={16} color="#1976d2">
                 Your Flashcards ({flashcards.length})
             </Text>
 
             {flashcards.length > 0 ? (
-                <YStack space="$2">
+                <YStack space="$3">
                     {flashcards.map((card) => (
                         <Card
                             key={card.id}
@@ -25,7 +25,14 @@ export const FlashcardList = ({
                             p="$3"
                             borderWidth={1}
                             borderColor="#e0e0e0"
-                            elevation={1}
+                            borderRadius={10}
+                            elevation={2}
+                            style={{
+                                shadowColor: '#000',
+                                shadowOpacity: 0.04,
+                                shadowRadius: 4,
+                                shadowOffset: { width: 0, height: 2 },
+                            }}
                         >
                             <YStack space="$2">
                                 <XStack jc="space-between" ai="center">
@@ -39,6 +46,8 @@ export const FlashcardList = ({
                                             icon={<Edit3 size={14} color="#1976d2" />}
                                             onPress={() => editFlashcard(card)}
                                             backgroundColor="#e3f2fd"
+                                            borderWidth={1}
+                                            borderColor="#bbdefb"
                                         />
                                         <Button
                                             size="$1"
@@ -46,12 +55,14 @@ export const FlashcardList = ({
                                             icon={<Trash2 size={14} color="#d32f2f" />}
                                             onPress={() => deleteFlashcard(card.id)}
                                             backgroundColor="#ffebee"
+                                            borderWidth={1}
+                                            borderColor="#ffcdd2"
                                         />
                                     </XStack>
                                 </XStack>
                                 <Text fontWeight="500">Q: {card.question}</Text>
                                 <Text color="#616161">A: {card.answer}</Text>
-                                <Text fontSize="$1" color="#9e9e9e" textTransform="capitalize">
+                                <Text fontSize={12} color="#9e9e9e" textTransform="capitalize">
                                     Difficulty: {card.difficulty}
                                 </Text>
                             </YStack>
@@ -66,9 +77,17 @@ export const FlashcardList = ({
                     jc="center"
                     borderWidth={1}
                     borderColor="#e0e0e0"
+                    borderRadius={10}
+                    elevation={1}
+                    style={{
+                        shadowColor: '#000',
+                        shadowOpacity: 0.03,
+                        shadowRadius: 3,
+                        shadowOffset: { width: 0, height: 1 },
+                    }}
                 >
-                    <BookOpen size={40} color="#9e9e9e" />
-                    <Text mt="$2" color="#616161">
+                    <BookOpen size={36} color="#9e9e9e" />
+                    <Text mt="$2" color="#616161" fontWeight="500">
                         No flashcards yet. Add your first one!
                     </Text>
                 </Card>

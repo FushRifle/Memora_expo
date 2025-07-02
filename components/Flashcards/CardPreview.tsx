@@ -12,12 +12,15 @@ export const FlashcardPreview = () => {
 
     return (
         <YStack space="$4" mt="$4">
-            <Text fontWeight="600" color="#1976d2">Flashcard Preview</Text>
+            <Text fontWeight="700" fontSize={16} color="#1976d2">
+                Flashcard Preview
+            </Text>
 
             <XStack jc="center">
                 <TouchableRipple
                     onPress={() => setIsFlipped(!isFlipped)}
                     borderless
+                    rippleColor="#1976d2"
                     style={{ borderRadius: 12, width: '100%' }}
                 >
                     <Card
@@ -29,13 +32,20 @@ export const FlashcardPreview = () => {
                         p="$5"
                         borderWidth={1}
                         borderColor="#e0e0e0"
-                        elevation={2}
+                        borderRadius={12}
+                        elevation={3}
+                        style={{
+                            shadowColor: '#000',
+                            shadowOpacity: 0.05,
+                            shadowRadius: 6,
+                            shadowOffset: { width: 0, height: 2 },
+                        }}
                     >
                         <XStack space="$2" ai="center">
                             <FlipHorizontal size={20} color="#1976d2" />
-                            <Text color="#1976d2">Tap to flip</Text>
+                            <Text color="#1976d2" fontWeight="600">Tap to flip</Text>
                         </XStack>
-                        <Text mt="$4" fontSize="$6" textAlign="center" color="#212121">
+                        <Text mt="$4" fontSize={18} textAlign="center" color="#212121">
                             {isFlipped ? mockFlashcards[0].answer : mockFlashcards[0].question}
                         </Text>
                     </Card>
@@ -48,8 +58,9 @@ export const FlashcardPreview = () => {
                     borderWidth={1}
                     borderColor="#e0e0e0"
                     backgroundColor="white"
+                    borderRadius={8}
                 >
-                    <Text color="#1976d2">Shuffle</Text>
+                    <Text color="#1976d2" fontWeight="600">Shuffle</Text>
                 </Button>
             </XStack>
 
@@ -61,14 +72,21 @@ export const FlashcardPreview = () => {
                         p="$3"
                         borderWidth={1}
                         borderColor="#e0e0e0"
-                        elevation={1}
+                        borderRadius={10}
+                        elevation={2}
+                        style={{
+                            shadowColor: '#000',
+                            shadowOpacity: 0.04,
+                            shadowRadius: 4,
+                            shadowOffset: { width: 0, height: 2 },
+                        }}
                     >
                         <YStack space="$2">
-                            <XStack jc="space-between">
+                            <XStack jc="space-between" ai="center">
                                 <Text fontWeight="600" color="#1976d2">
                                     {card.category}
                                 </Text>
-                                <Text fontSize="$1" color="#9e9e9e" textTransform="capitalize">
+                                <Text fontSize={12} color="#9e9e9e" textTransform="capitalize">
                                     {card.difficulty}
                                 </Text>
                             </XStack>

@@ -15,17 +15,26 @@ export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
 
     return (
         <YStack space="$4" marginBottom="$9">
-            <Text fontWeight="600" color="#1976d2">Study Mode</Text>
+            <Text fontWeight="700" fontSize={16} color="#1976d2">
+                Study Mode
+            </Text>
 
             <Card
                 backgroundColor="white"
                 p="$4"
                 borderWidth={1}
                 borderColor="#e0e0e0"
-                elevation={1}
+                borderRadius={12}
+                elevation={2}
+                style={{
+                    shadowColor: '#000',
+                    shadowOpacity: 0.05,
+                    shadowRadius: 6,
+                    shadowOffset: { width: 0, height: 2 },
+                }}
             >
-                <YStack space="$3" ai="center">
-                    <Text fontSize="$7" fontWeight="700" color="#1976d2">
+                <YStack space="$4" ai="center">
+                    <Text fontSize={16} fontWeight="700" color="#1976d2">
                         Flashcard {currentIndex + 1}/{flashcards.length || mockFlashcards.length}
                     </Text>
 
@@ -35,61 +44,82 @@ export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
                         ai="center"
                         jc="center"
                         backgroundColor="#e3f2fd"
+                        borderRadius={10}
                         p="$5"
                         borderWidth={1}
                         borderColor="#bbdefb"
                         onPress={() => setIsFlipped(!isFlipped)}
+                        elevation={1}
+                        style={{
+                            shadowColor: '#000',
+                            shadowOpacity: 0.04,
+                            shadowRadius: 4,
+                            shadowOffset: { width: 0, height: 2 },
+                        }}
                     >
-                        <Text fontSize="$6" textAlign="center" color="#0d47a1">
+                        <Text fontSize={18} textAlign="center" color="#0d47a1" fontWeight="600">
                             {isFlipped ? currentCard.answer : currentCard.question}
                         </Text>
                     </Card>
 
-                    <XStack space="$3" mt="$3">
+                    <XStack space="$3">
                         <Button
                             icon={<Shuffle size={16} color="#1976d2" />}
                             borderWidth={1}
                             borderColor="#e0e0e0"
                             backgroundColor="white"
+                            borderRadius={8}
                         >
-                            <Text color="#1976d2">Shuffle</Text>
+                            <Text color="#1976d2" fontWeight="600">Shuffle</Text>
                         </Button>
                         <Button
                             icon={<FlipHorizontal size={16} color="#1976d2" />}
                             borderWidth={1}
                             borderColor="#e0e0e0"
                             backgroundColor="white"
+                            borderRadius={8}
                             onPress={() => setIsFlipped(!isFlipped)}
                         >
-                            <Text color="#1976d2">Flip</Text>
+                            <Text color="#1976d2" fontWeight="600">Flip</Text>
                         </Button>
                     </XStack>
 
-                    <XStack space="$3" mt="$4">
+                    <XStack space="$3">
                         <Button
                             backgroundColor="#f44336"
+                            borderRadius={8}
                             flex={1}
                         >
-                            <Text color="white">Incorrect</Text>
+                            <Text color="white" fontWeight="600">Incorrect</Text>
                         </Button>
                         <Button
                             backgroundColor="#4caf50"
+                            borderRadius={8}
                             flex={1}
                         >
-                            <Text color="white">Correct</Text>
+                            <Text color="white" fontWeight="600">Correct</Text>
                         </Button>
                     </XStack>
                 </YStack>
             </Card>
 
             <YStack space="$3" mt="$4">
-                <Text fontWeight="600" color="#1976d2">Study Progress</Text>
+                <Text fontWeight="700" fontSize={15} color="#1976d2">
+                    Study Progress
+                </Text>
                 <Card
                     backgroundColor="white"
                     p="$4"
                     borderWidth={1}
                     borderColor="#e0e0e0"
+                    borderRadius={10}
                     elevation={1}
+                    style={{
+                        shadowColor: '#000',
+                        shadowOpacity: 0.03,
+                        shadowRadius: 3,
+                        shadowOffset: { width: 0, height: 1 },
+                    }}
                 >
                     <YStack space="$2">
                         <XStack jc="space-between">

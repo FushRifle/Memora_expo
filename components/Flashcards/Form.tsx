@@ -1,4 +1,4 @@
-import { YStack, Input, Button, XStack, Text, Card } from 'tamagui'
+import { YStack, Input, Button, XStack, Text, Card, Stack } from 'tamagui'
 import { Plus, Check, ChevronDown } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 
@@ -34,14 +34,23 @@ export const FlashcardForm = ({
 
     return (
         <Card
-            backgroundColor="white"
+            bg="white"
             p="$4"
             borderWidth={1}
             borderColor="#e0e0e0"
-            elevation={1}
+            elevation={2}
+            borderRadius={12}
+            style={{
+                shadowColor: '#000',
+                shadowOpacity: 0.05,
+                shadowRadius: 6,
+                shadowOffset: { width: 0, height: 2 },
+            }}
         >
             <YStack space="$3">
-                <Text fontWeight="600" color="#1976d2">Flashcard Details</Text>
+                <Text fontWeight="700" fontSize={16} color="#1976d2">
+                    Flashcard Details
+                </Text>
 
                 <Input
                     placeholder="Question"
@@ -50,6 +59,7 @@ export const FlashcardForm = ({
                     backgroundColor="white"
                     borderWidth={1}
                     borderColor="#e0e0e0"
+                    borderRadius={8}
                     placeholderTextColor="#9e9e9e"
                 />
 
@@ -60,6 +70,7 @@ export const FlashcardForm = ({
                     backgroundColor="white"
                     borderWidth={1}
                     borderColor="#e0e0e0"
+                    borderRadius={8}
                     placeholderTextColor="#9e9e9e"
                     multiline
                     numberOfLines={3}
@@ -74,13 +85,15 @@ export const FlashcardForm = ({
                         backgroundColor="white"
                         borderWidth={1}
                         borderColor="#e0e0e0"
+                        borderRadius={8}
+                        jc="space-between"
                     >
-                        <Text>{category}</Text>
+                        <Text color="#1976d2">{category}</Text>
                     </Button>
                 </XStack>
 
                 {showCategories && (
-                    <Card backgroundColor="#f5f5f5" p="$2" space="$2">
+                    <YStack bg="#f9f9f9" p="$2" borderRadius={8} space="$2">
                         {categories.map((cat) => (
                             <Button
                                 key={cat}
@@ -89,11 +102,14 @@ export const FlashcardForm = ({
                                     setShowCategories(false)
                                 }}
                                 backgroundColor={category === cat ? '#e3f2fd' : 'white'}
+                                borderRadius={8}
+                                borderWidth={1}
+                                borderColor="#e0e0e0"
                             >
                                 <Text color="#1976d2">{cat}</Text>
                             </Button>
                         ))}
-                    </Card>
+                    </YStack>
                 )}
 
                 <XStack space="$2" ai="center">
@@ -104,11 +120,14 @@ export const FlashcardForm = ({
                                 key={level}
                                 flex={1}
                                 size="$2"
+                                borderRadius={8}
                                 backgroundColor={difficulty === level ? '#1976d2' : '#e3f2fd'}
                                 onPress={() => setDifficulty(level)}
                             >
                                 <Text
                                     color={difficulty === level ? 'white' : '#1976d2'}
+                                    fontSize={12}
+                                    fontWeight="600"
                                     textTransform="capitalize"
                                 >
                                     {level}
@@ -125,6 +144,7 @@ export const FlashcardForm = ({
                             borderWidth={1}
                             borderColor="#e0e0e0"
                             backgroundColor="white"
+                            borderRadius={8}
                         >
                             <Text color="#1976d2">Cancel</Text>
                         </Button>
@@ -132,6 +152,7 @@ export const FlashcardForm = ({
                     <Button
                         icon={isEditing ? <Check size={16} color="white" /> : <Plus size={16} color="white" />}
                         backgroundColor="#1976d2"
+                        borderRadius={8}
                         disabled={!question.trim() || !answer.trim()}
                         onPress={isEditing ? updateFlashcard : addFlashcard}
                     >
