@@ -1,4 +1,4 @@
-import { YStack, ScrollView, Separator, Text, H4 } from 'tamagui'
+import { YStack, ScrollView, Text, H4 } from 'tamagui'
 import { Bookmark, Bell, Mail } from '@tamagui/lucide-icons'
 import { useNavigation } from '@react-navigation/native'
 import { ProfileHeader } from '@/components/Profile/Header'
@@ -27,10 +27,9 @@ export function ProfileScreen() {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <YStack space="$5" padding="$4">
+                {/* ✅ Just use it directly now */}
+                <ProfileHeader />
 
-                {/* Header */}
-                <ProfileHeader onSettingsPress={() => navigation.navigate('Settings')} />
-                {/* Profile card */}
                 <ProfileCard
                     name="Fush"
                     username="fush_learner"
@@ -38,7 +37,6 @@ export function ProfileScreen() {
                     stats={stats}
                 />
 
-                {/* Menu items */}
                 <YStack space="$2" marginTop="$4">
                     {menuItems.map((item, index) => (
                         <ProfileMenuItem
@@ -51,14 +49,13 @@ export function ProfileScreen() {
                     ))}
                 </YStack>
 
-                {/* Recent activity */}
                 <YStack space="$3" marginTop="$6">
                     <MotiView
                         from={{ opacity: 0, translateY: -8 }}
                         animate={{ opacity: 1, translateY: 0 }}
                         transition={{ type: 'spring', delay: 150 }}
                     >
-                        <H4 fontWeight="700" fontSize="$5">
+                        <H4 fontWeight="700" fontSize="$6">
                             Recent Activity
                         </H4>
                     </MotiView>

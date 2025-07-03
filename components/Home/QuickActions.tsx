@@ -33,7 +33,7 @@ export const QuickActions = ({ handleActionPress }: { handleActionPress: (screen
                         }
                     }}
                     borderless
-                    rippleColor={colors.primary}
+                    rippleColor={colors.primaryDark}
                     style={{ flex: 1, borderRadius: 12 }}
                 >
                     <Stack
@@ -41,7 +41,7 @@ export const QuickActions = ({ handleActionPress }: { handleActionPress: (screen
                         p="$2"
                         borderRadius={12}
                         borderWidth={1}
-                        borderColor={colors.primary}
+                        borderColor={colors.primaryDark}
                         flexDirection="row"
                         alignItems="center"
                         justifyContent="space-between"
@@ -57,7 +57,7 @@ export const QuickActions = ({ handleActionPress }: { handleActionPress: (screen
                                 width={28}
                                 height={28}
                                 borderRadius={14}
-                                bg={colors.primary}
+                                bg={colors.primaryDark}
                                 justifyContent="center"
                                 alignItems="center"
                             >
@@ -66,13 +66,13 @@ export const QuickActions = ({ handleActionPress }: { handleActionPress: (screen
                             <Text
                                 fontSize={13}
                                 fontWeight="600"
-                                color={colors.primary}
+                                color={colors.primaryDark}
                                 numberOfLines={1}
                             >
                                 {label}
                             </Text>
                         </XStack>
-                        <ChevronRight size={16} color={colors.primary as any} />
+                        <ChevronRight size={16} color={colors.primaryDark as any} />
                     </Stack>
                 </TouchableRipple>
             ))}
@@ -81,7 +81,7 @@ export const QuickActions = ({ handleActionPress }: { handleActionPress: (screen
 
     return (
         <YStack space="$4" padding="$2">
-            <Text fontWeight="700" color={colors.primary} fontSize={16}>
+            <Text fontWeight="700" color={colors.primaryDark} fontSize={16}>
                 Quick Actions
             </Text>
             {renderActionRow(actionButtons.slice(0, 2))}

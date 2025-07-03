@@ -1,34 +1,17 @@
 import { XStack, H4, Button, Stack } from 'tamagui'
 import { Settings } from '@tamagui/lucide-icons'
 import { MotiView } from 'moti'
-import * as Haptics from 'expo-haptics'
 import { useTheme } from '@/styles/ThemeContext'
-import { Alert } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import type { RootStackParamList } from '@/types'
 
-export function ProfileHeader({ onSettingsPress }: { onSettingsPress: () => void }) {
+export function ProfileHeader() {
     const { colors } = useTheme()
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
-    const handlePress = async () => {
-        console.log('Settings icon pressed!')
-
-        try {
-            // Trigger haptic feedback
-            await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-
-            // Call the navigation callback
-            if (typeof onSettingsPress === 'function') {
-                onSettingsPress()
-            } else {
-                console.warn('onSettingsPress is not a function')
-                Alert.alert('Error', 'Navigation not available')
-            }
-        } catch (error) {
-            console.error('Haptic feedback error:', error)
-            // Fallback to normal press if haptics fails
-            if (typeof onSettingsPress === 'function') {
-                onSettingsPress()
-            }
-        }
+    const handlePress = () => {
+        navigation.navigate('Settings')
     }
 
     return (
@@ -38,7 +21,7 @@ export function ProfileHeader({ onSettingsPress }: { onSettingsPress: () => void
             transition={{ type: 'spring', delay: 100 }}
         >
             <XStack justifyContent="space-between" alignItems="center" mt="$5">
-                <H4 fontWeight="800" color={colors.primary}>
+                <H4 fontWeight="800" color={colors.primaryDark}>
                     Profile
                 </H4>
                 <Button
@@ -46,13 +29,13 @@ export function ProfileHeader({ onSettingsPress }: { onSettingsPress: () => void
                     backgroundColor="transparent"
                     pressStyle={{ scale: 0.92 }}
                     padding="$2"
-                    hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }} // Makes it easier to press
+                    hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }} // easier to tap
                 >
                     <Stack
                         padding="$2.5"
-                        backgroundColor={colors.primary}
+                        backgroundColor={colors.primaryDark}
                         borderRadius="$10"
-                        shadowColor={colors.primary}
+                        shadowColor={colors.primaryDark}
                         shadowRadius={6}
                         shadowOpacity={0.15}
                         shadowOffset={{ width: 0, height: 3 }}

@@ -84,6 +84,7 @@ export function MainNavigation() {
             screenOptions={{
                 headerTransparent: true,
                 headerTitle: '',
+                headerShown: false,
                 headerShadowVisible: false,
             }}
         >

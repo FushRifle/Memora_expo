@@ -17,12 +17,13 @@ import {
     Theme,
     Card
 } from 'tamagui'
-import { useRouter } from 'expo-router'
-import { Search, Menu } from '@tamagui/lucide-icons'
+import { useNavigation } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons'
-import * as Haptics from 'expo-haptics'
 import { LinearGradient } from 'tamagui/linear-gradient'
 import { MotiView } from 'moti'
+import { Menu, Search } from '@tamagui/lucide-icons'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import type { RootStackParamList } from '@/types'
 
 const FloatingBadge = styled(Circle, {
     position: 'absolute',
@@ -45,8 +46,8 @@ const ProfileImageContainer = styled(Stack, {
     borderRadius: 16,
     overflow: 'hidden',
     borderWidth: 2,
-    borderColor: '$primary',
-    shadowColor: '$primary',
+    borderColor: '$primaryDarkDark',
+    shadowColor: '$primaryDarkDark',
     shadowRadius: 6,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 3 }
@@ -59,7 +60,7 @@ const ActionButton = styled(Stack, {
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '$primary',
+    borderColor: '$primaryDarkDark',
     backgroundColor: '$surface',
     shadowColor: '$background',
     shadowRadius: 4,
@@ -68,8 +69,8 @@ const ActionButton = styled(Stack, {
 })
 
 export const HomeHeader = () => {
-    const router = useRouter()
     const theme = useTheme()
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
     const [unreadCount, setUnreadCount] = useState<number>(3)
     const [searchQuery, setSearchQuery] = useState<string>('')
     const [isSearching, setIsSearching] = useState(false)
@@ -85,25 +86,24 @@ export const HomeHeader = () => {
     }, [unreadCount])
 
     const handleProfilePress = () => {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
-        router.push('/profile')
+        navigation.navigate('Profile')
     }
 
     const handleNotificationPress = () => {
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-        router.push('/notifications')
+        navigation.navigate('Notifications' as never)
+    }
+
+    const handleSettingsPress = () => {
+        navigation.navigate('Settings')
     }
 
     const handleSearchPress = () => {
         if (searchQuery.trim()) {
-            Haptics.selectionAsync()
             setIsSearching(true)
             setTimeout(() => {
                 setIsSearching(false)
                 console.log('Searching:', searchQuery)
             }, 1500)
-        } else {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning)
         }
     }
 
@@ -154,9 +154,12 @@ export const HomeHeader = () => {
                                     <H4 color="white" fontWeight="900">Fush</H4>
                                 </MotiView>
                             </YStack>
+
                             <XStack space="$3">
                                 <Button unstyled onPress={handleNotificationPress} position="relative">
-                                    <ActionButton>
+                                    <ActionButton
+                                        borderBlockColor='indigo'
+                                    >
                                         <Feather name="bell" size={20} color="white" />
                                     </ActionButton>
                                     {unreadCount > 0 && (
@@ -168,8 +171,10 @@ export const HomeHeader = () => {
                                     )}
                                 </Button>
 
-                                <Button unstyled>
-                                    <ActionButton>
+                                <Button unstyled onPress={handleSettingsPress}>
+                                    <ActionButton
+                                        borderBlockColor='indigo'
+                                    >
                                         <Menu size={20} color="white" />
                                     </ActionButton>
                                 </Button>
@@ -206,7 +211,8 @@ export const HomeHeader = () => {
                                     onBlur={() => setIsFocused(false)}
                                     onKeyPress={handleKeyPress}
                                     borderWidth={0}
-                                    fontSize="$4"
+                                    fontSize="$2"
+                                    height="$3"
                                     backgroundColor="transparent"
                                     color="white"
                                 />

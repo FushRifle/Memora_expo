@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react'
 import { YStack, ScrollView, Switch, Separator } from 'tamagui'
 import { Moon, Sun, Bell, User, Lock, HelpCircle } from '@tamagui/lucide-icons'
 import { useNavigation } from 'expo-router'
@@ -5,14 +6,22 @@ import * as Haptics from 'expo-haptics'
 import { SettingsHeader } from '@/components/Settings/Header'
 import { SettingsGroup } from '@/components/Settings/Group'
 import { SettingsItem } from '@/components/Settings/Item'
-import React, { useState } from 'react'
+import { useTheme } from '@/styles/ThemeContext'
+import { NavigationProp } from '@react-navigation/native'
+import { RootStackParamList } from '@/types'
 
 export function SettingsScreen() {
-    const navigation = useNavigation()
-    const [darkMode, setDarkMode] = React.useState(false)
+    const { colors, toggleTheme, isDark } = useTheme()
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+
+    // Memoized toggle function
+    const handleToggleTheme = useCallback(() => {
+        toggleTheme()
+        Haptics.selectionAsync()
+    }, [toggleTheme])
 
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <YStack space="$4" padding="$4">
                 <SettingsHeader onBack={() => navigation.goBack()} />
 
@@ -24,18 +33,15 @@ export function SettingsScreen() {
 
                 <SettingsGroup title="Preferences" index={1}>
                     <SettingsItem
-                        icon={darkMode ? Moon : Sun}
+                        icon={isDark ? Moon : Sun}
                         label="Dark Mode"
-                        onPress={() => {
-                            setDarkMode(!darkMode)
-                            Haptics.selectionAsync()
-                        }}
+                        onPress={handleToggleTheme}
                     >
                         <Switch
                             size="$2"
-                            checked={darkMode}
+                            checked={isDark}
                             onCheckedChange={(val) => {
-                                setDarkMode(val)
+                                toggleTheme()
                                 Haptics.selectionAsync()
                             }}
                         >
