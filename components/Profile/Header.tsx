@@ -3,13 +3,32 @@ import { Settings } from '@tamagui/lucide-icons'
 import { MotiView } from 'moti'
 import * as Haptics from 'expo-haptics'
 import { useTheme } from '@/styles/ThemeContext'
+import { Alert } from 'react-native'
 
 export function ProfileHeader({ onSettingsPress }: { onSettingsPress: () => void }) {
     const { colors } = useTheme()
 
-    const handlePress = () => {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-        onSettingsPress()
+    const handlePress = async () => {
+        console.log('Settings icon pressed!')
+
+        try {
+            // Trigger haptic feedback
+            await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+
+            // Call the navigation callback
+            if (typeof onSettingsPress === 'function') {
+                onSettingsPress()
+            } else {
+                console.warn('onSettingsPress is not a function')
+                Alert.alert('Error', 'Navigation not available')
+            }
+        } catch (error) {
+            console.error('Haptic feedback error:', error)
+            // Fallback to normal press if haptics fails
+            if (typeof onSettingsPress === 'function') {
+                onSettingsPress()
+            }
+        }
     }
 
     return (
@@ -22,7 +41,13 @@ export function ProfileHeader({ onSettingsPress }: { onSettingsPress: () => void
                 <H4 fontWeight="800" color={colors.primary}>
                     Profile
                 </H4>
-                <Button unstyled onPress={handlePress} pressStyle={{ scale: 0.92 }}>
+                <Button
+                    onPress={handlePress}
+                    backgroundColor="transparent"
+                    pressStyle={{ scale: 0.92 }}
+                    padding="$2"
+                    hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }} // Makes it easier to press
+                >
                     <Stack
                         padding="$2.5"
                         backgroundColor={colors.primary}

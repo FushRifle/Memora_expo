@@ -1,30 +1,37 @@
 import { YStack, XStack, Text, Stack } from 'tamagui'
-import { useRouter } from 'expo-router'
 import { TouchableRipple } from 'react-native-paper'
 import {
     BookOpen, FileText, BarChart2, Mic,
     Book, CheckSquare, ChevronRight
 } from '@tamagui/lucide-icons'
 import { useTheme } from '@/styles/ThemeContext'
+import { useNavigation } from '@react-navigation/native'
+
 
 const actionButtons = [
-    { id: 'flashcards', label: 'Flashcards', icon: BookOpen, route: '/flashcards' },
-    { id: 'documents', label: 'Documents', icon: FileText, route: '/documents' },
-    { id: 'analytics', label: 'Analytics', icon: BarChart2, route: '/analytics' },
-    { id: 'voice', label: 'Voice Notes', icon: Mic, route: '/voice' },
-    { id: 'courses', label: 'Courses', icon: Book, route: '/courses' },
-    { id: 'quiz', label: 'Quiz', icon: CheckSquare, route: '/quiz' },
+    { id: 'flashcards', label: 'Flashcards', icon: BookOpen, screen: 'Flashcards' },
+    { id: 'documents', label: 'Documents', icon: FileText, screen: 'Documents' },
+    { id: 'analytics', label: 'Analytics', icon: BarChart2, screen: 'Analytics' },
+    { id: 'voice', label: 'Voice Notes', icon: Mic, screen: 'Voice' },
+    { id: 'courses', label: 'Courses', icon: Book, screen: 'Courses' },
+    { id: 'quiz', label: 'Quiz', icon: CheckSquare, screen: 'Quiz' },
 ]
 
-export const QuickActions = () => {
-    const router = useRouter()
+export const QuickActions = ({ handleActionPress }: { handleActionPress: (screen: string) => void }) => {
     const { colors } = useTheme()
+    const navigation = useNavigation()
+
+
     const renderActionRow = (actions: typeof actionButtons) => (
         <XStack space="$3">
-            {actions.map(({ id, label, icon: Icon, route }) => (
+            {actions.map(({ id, label, icon: Icon, screen }) => (
                 <TouchableRipple
                     key={id}
-                    onPress={() => router.push(route)}
+                    onPress={() => {
+                        if (navigation && screen) {
+                            navigation.navigate(screen as never)
+                        }
+                    }}
                     borderless
                     rippleColor={colors.primary}
                     style={{ flex: 1, borderRadius: 12 }}
@@ -77,7 +84,6 @@ export const QuickActions = () => {
             <Text fontWeight="700" color={colors.primary} fontSize={16}>
                 Quick Actions
             </Text>
-
             {renderActionRow(actionButtons.slice(0, 2))}
             {renderActionRow(actionButtons.slice(2, 4))}
             {renderActionRow(actionButtons.slice(4, 6))}

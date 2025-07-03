@@ -37,8 +37,8 @@ export function ProfileCard({
                     end={[1, 1]}
                     padding="$4"
                 >
-                    <YStack alignItems="center" space="$4">
-                        <Circle size="$12" overflow="hidden" borderWidth={2} borderColor="white">
+                    <YStack alignItems="center" space="$3">
+                        <Circle size="$8" overflow="hidden" borderWidth={2} borderColor="white">
                             <Image
                                 source={require('@/assets/user.png')}
                                 width="100%"
@@ -52,7 +52,7 @@ export function ProfileCard({
                             <Text color="white" opacity={0.8}>@{username}</Text>
                         </YStack>
 
-                        <Text textAlign="center" color="white" opacity={0.9} fontSize="$4">
+                        <Text textAlign="center" color="white" opacity={0.9} fontSize="$3">
                             {bio || "Passionate learner exploring new subjects and mastering skills every day."}
                         </Text>
 
@@ -65,7 +65,7 @@ export function ProfileCard({
                                     transition={{ type: 'spring', delay: 100 + index * 50 }}
                                 >
                                     <YStack alignItems="center">
-                                        <Text fontWeight="800" fontSize="$7" color="white">{stat.value}</Text>
+                                        <Text fontWeight="800" fontSize="$5" color="white">{stat.value}</Text>
                                         <Text color="white" opacity={0.8} fontSize="$2">{stat.label}</Text>
                                     </YStack>
                                 </MotiView>
