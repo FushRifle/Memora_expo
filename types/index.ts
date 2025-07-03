@@ -1,5 +1,15 @@
-// types.d.ts
 import 'tamagui'
+
+
+export type RootStackParamList = {
+    MainTabs: undefined
+    FlashcardViewer: undefined
+    DocumentResult: undefined
+    Analytics: undefined
+    Settings: undefined
+    Profile: undefined
+    Documents: undefined
+}
 
 declare module 'tamagui' {
     interface Theme {

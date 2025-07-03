@@ -1,18 +1,27 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Home, BookOpen, Bot, GraduationCap, User2 } from '@tamagui/lucide-icons'
+import { useSafeTheme } from '@/hook/theme/useTheme'
+import type { RootStackParamList } from '@/types'
+
+
+// Dashboard screens
 import HomeScreen from '@/screens/dashboard/HomeScreen'
 import { FlashcardGeneratorScreen } from '@/screens/dashboard/FlashcardGeneratorScreen'
-import { DocumentsScreen } from '@/screens/dashboard/DocumentAnalysisScreen'
+import { FlashcardViewerScreen } from '@/screens/dashboard/FlashcardViewerScreen'
 import { StudyAnalyticsScreen } from '@/screens/dashboard/StudyAnalyticsScreen'
 import { AIChatScreen } from '@/screens/dashboard/AIChatScreen'
-import { FlashcardViewerScreen } from '@/screens/dashboard/FlashcardViewerScreen'
 import DocumentResultScreen from '@/screens/dashboard/DocumentResultScreen'
-import { Home, BookOpen, Bot, GraduationCap, FileText } from '@tamagui/lucide-icons'
-import { useSafeTheme } from '@/hook/theme/useTheme'
+import { DocumentsScreen } from '@/screens/dashboard/DocumentAnalysisScreen'
 import CoursesScreen from '@/screens/dashboard/CourseScreen'
 
-const Stack = createNativeStackNavigator()
+// Settings & Profile screens
+import { ProfileScreen } from '@/screens/settings/ProfileScreen'
+import { SettingsScreen } from '@/screens/settings/SettingScreen'
+
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator()
 
 function MainTabs() {
@@ -52,17 +61,17 @@ function MainTabs() {
                 }}
             />
             <Tab.Screen
-                name="Documents"
-                component={DocumentsScreen}
+                name="AI Chat"
+                component={AIChatScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <FileText color={color} />,
+                    tabBarIcon: ({ color }) => <Bot color={color} />,
                 }}
             />
             <Tab.Screen
-                name="AI Chat"
-                component={AIChatScreen}   // <-- updated
+                name="Profile"
+                component={ProfileScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <Bot color={color} />,
+                    tabBarIcon: ({ color }) => <User2 color={color} />,
                 }}
             />
         </Tab.Navigator>
@@ -71,11 +80,20 @@ function MainTabs() {
 
 export function MainNavigation() {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+            screenOptions={{
+                headerTransparent: true,
+                headerTitle: '',
+                headerShadowVisible: false,
+            }}
+        >
             <Stack.Screen name="MainTabs" component={MainTabs} />
             <Stack.Screen name="FlashcardViewer" component={FlashcardViewerScreen} />
             <Stack.Screen name="DocumentResult" component={DocumentResultScreen} />
             <Stack.Screen name="Analytics" component={StudyAnalyticsScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="Documents" component={DocumentsScreen} />
         </Stack.Navigator>
     )
 }

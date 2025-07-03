@@ -79,68 +79,87 @@ export interface ThemeShadows {
 
 // --- Light Theme ---
 const lightColors: ThemeColors = {
-    primary: '#00394f',
-    secondary: 'orange',
-    accent: '#42C6A1',
-    background: '#F7F7F7',
-    cardBackground: '#EBEBEB',
-    text: '#3F3D56',
-    lightText: '#00394f',
+    primary: '#4B0082',                // Rich indigo
+    primaryLight: '#a4c8de',           // Lighter indigo shade
+    primaryDark: '#3A006B',            // Darker indigo
+
+    secondary: '#AAF0D1',              // Soft mint
+    secondaryContainer: '#D2FFF0',     // Even lighter mint for backgrounds
+    onSecondaryContainer: '#00394f',   // Dark text on mint backgrounds
+
+    accent: '#42C6A1',                 // Deeper mint / teal accent
+    background: '#F7F7F7',             // App background
+    cardBackground: '#EBEBEB',         // Card background
     card: '#FFFFFF',
-    textSecondary: '#7C7C7C',
-    border: '#00394f',
-    primaryLight: '#a4c8de',
+
+    text: '#3F3D56',                   // Main text
+    lightText: '#00394f',              // For lighter surfaces
+    textSecondary: '#7C7C7C',          // Secondary text
+
+    border: '#00394f',                 // Border color
     inputBackground: '#FFFFFF',
-    error: 'red',
-    success: 'green',
+
+    error: '#D32F2F',                  // Material red 700
+    success: '#388E3C',                // Material green 700
+    warning: '#FFA500',                // Orange
+
     disabled: '#CCCCCC',
-    warning: '#FFA500',
     buttonText: '#FFFFFF',
-    notificationUnread: '#e3f2fd',
+
+    notificationUnread: '#e3f2fd',     // Light blue-ish
     notificationRead: '#ffffff',
+    notification: '#007bff',           // Standard blue notification badge
+
     modalBackground: 'rgba(0,0,0,0.5)',
     surface: '#f5f5f5',
-    notification: '#007bff',
-    onPrimary: 'white',
-    primaryContainer: '#e3f2fd',
-    secondaryContainer: undefined,
+
+    onPrimary: '#FFFFFF',
     onPrimaryContainer: undefined,
-    onSecondaryContainer: undefined,
-    white: undefined,
-    primaryDark: undefined
+    primaryContainer: '#e3f2fd',
+    white: '#FFFFFF'                   // Explicit white color
 };
 
 // --- Dark Theme ---
 const darkColors: ThemeColors = {
-    primary: '#FFFFFF',
-    secondary: '#FF7594',
-    accent: '#52D6B1',
-    background: '#000000',
+    primary: '#9A7DCC',                // Softer indigo for dark bg
+    primaryLight: '#BFA5E3',           // Lighter indigo
+    primaryDark: '#7B5BAA',            // Darker indigo
+
+    secondary: '#52D6B1',              // Mint (matches accent)
+    secondaryContainer: '#2C4F46',     // Darker muted mint background
+    onSecondaryContainer: '#E1FDF5',   // Light text on mint bg
+
+    accent: '#52D6B1',                 // Minty accent
+
+    background: '#000000',             // App background
+    surface: '#222222',                // Surfaces
     cardBackground: '#141414',
+    card: '#1E1E1E',
+
     text: '#FFFFFF',
     lightText: '#B1B1C5',
-    card: '#1E1E1E',
     textSecondary: '#A0A0A0',
+
     border: '#333333',
-    primaryLight: '#D3D3D3',
     inputBackground: '#1A1A1A',
+
     error: '#FF6B6B',
     success: '#4CAF50',
-    disabled: '#555555',
     warning: '#FFC107',
+    disabled: '#555555',
+
     buttonText: '#000000',
-    notificationUnread: '#1e3a8a',
-    notificationRead: '#1f2937',
+
+    notificationUnread: '#1e3a8a',     // Deep indigo for unread
+    notificationRead: '#1f2937',      // Dark muted bg
+    notification: '#4dabf7',          // Bright notification badge
+
     modalBackground: 'rgba(0,0,0,0.8)',
-    surface: '#222222',
-    notification: '#4dabf7',
-    onPrimary: undefined,
-    primaryContainer: undefined,
-    secondaryContainer: undefined,
-    onPrimaryContainer: undefined,
-    onSecondaryContainer: undefined,
-    white: undefined,
-    primaryDark: undefined
+
+    onPrimary: '#FFFFFF',              // Text/icons on primary
+    primaryContainer: '#2F2F2F',       // Container using primary shade
+    onPrimaryContainer: '#FFFFFF',     // Text on primary container
+    white: '#FFFFFF',
 };
 
 // --- Fonts ---

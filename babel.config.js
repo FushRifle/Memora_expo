@@ -17,6 +17,6 @@ module.exports = {
                 allowUndefined: false,
             },
         ],
-        'react-native-reanimated/plugin', // always last
+        'react-native-reanimated/plugin',
     ],
 }

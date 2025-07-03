@@ -32,7 +32,7 @@ const STUDY_DATA = {
     datasets: [
         {
             data: [45, 60, 30, 75, 90, 20, 45],
-            color: () => `#1976d2`,
+            color: () => '#4B0082',   // your indigo primary
             strokeWidth: 2
         }
     ]
@@ -53,36 +53,40 @@ export const RecentActivity = () => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <YStack space="$4">
+
                 {/* Header */}
                 <H4 color="#424242">Study Overview</H4>
 
-                {/* Charts with tabs */}
+                {/* Chart Card */}
                 <Card backgroundColor="white" borderRadius={12} shadowColor="#000" shadowOpacity={0.05} shadowRadius={4}>
                     <YStack p="$3" space="$2">
+
+                        {/* Tabs Header */}
                         <XStack ai="center" space="$2">
                             {activeTab === 'study'
-                                ? <BarChart2 size={20} color="#1976d2" />
-                                : <Activity size={20} color="#1976d2" />}
+                                ? <BarChart2 size={20} color="#4B0082" />
+                                : <Activity size={20} color="#4B0082" />}
                             <Text fontWeight="600" color="#424242">
                                 {activeTab === 'study' ? 'Weekly Study Time' : 'Subject Progress'}
                             </Text>
                         </XStack>
 
+                        {/* Chart */}
                         {activeTab === 'study' ? (
                             <LineChart
                                 data={STUDY_DATA}
                                 width={screenWidth}
                                 height={200}
+                                bezier
                                 chartConfig={{
                                     backgroundColor: 'white',
                                     backgroundGradientFrom: 'white',
                                     backgroundGradientTo: 'white',
                                     decimalPlaces: 0,
-                                    color: () => `#1976d2`,
-                                    labelColor: () => `#757575`,
-                                    propsForDots: { r: "4", strokeWidth: "2", stroke: "#1976d2" }
+                                    color: () => '#4B0082',
+                                    labelColor: () => '#757575',
+                                    propsForDots: { r: "4", strokeWidth: "2", stroke: "#4B0082" }
                                 }}
-                                bezier
                                 style={{ marginVertical: 8, borderRadius: 12 }}
                             />
                         ) : (
@@ -90,44 +94,44 @@ export const RecentActivity = () => {
                                 data={PROGRESS_DATA}
                                 width={screenWidth}
                                 height={200}
-                                yAxisLabel=""
-                                yAxisSuffix=""
+                                fromZero
+                                xAxisLabel=''
+                                yAxisSuffix=''
+                                yAxisLabel=''
                                 chartConfig={{
                                     backgroundColor: 'white',
                                     backgroundGradientFrom: 'white',
                                     backgroundGradientTo: 'white',
                                     decimalPlaces: 0,
-                                    color: () => `#1976d2`,
-                                    labelColor: () => `#757575`,
+                                    color: () => '#4B0082',
+                                    labelColor: () => '#757575',
                                     barPercentage: 0.5
                                 }}
-                                fromZero
                                 style={{ marginVertical: 8, borderRadius: 12 }}
                             />
-
                         )}
 
-                        {/* Tabs */}
+                        {/* Tabs Buttons */}
                         <XStack mt="$2" jc="space-around">
                             <Button
                                 size="$2"
-                                backgroundColor={activeTab === 'study' ? '#1976d2' : 'white'}
+                                backgroundColor={activeTab === 'study' ? '#4B0082' : 'white'}
                                 borderWidth={1}
-                                borderColor="#1976d2"
+                                borderColor="#4B0082"
                                 borderRadius={20}
                                 onPress={() => setActiveTab('study')}
                             >
-                                <Text color={activeTab === 'study' ? 'white' : '#1976d2'}>Weekly Study</Text>
+                                <Text color={activeTab === 'study' ? 'white' : '#4B0082'}>Weekly Study</Text>
                             </Button>
                             <Button
                                 size="$2"
-                                backgroundColor={activeTab === 'progress' ? '#1976d2' : 'white'}
+                                backgroundColor={activeTab === 'progress' ? '#4B0082' : 'white'}
                                 borderWidth={1}
-                                borderColor="#1976d2"
+                                borderColor="#4B0082"
                                 borderRadius={20}
                                 onPress={() => setActiveTab('progress')}
                             >
-                                <Text color={activeTab === 'progress' ? 'white' : '#1976d2'}>Progress</Text>
+                                <Text color={activeTab === 'progress' ? 'white' : '#4B0082'}>Progress</Text>
                             </Button>
                         </XStack>
                     </YStack>
@@ -136,7 +140,7 @@ export const RecentActivity = () => {
                 {/* Recent Activity */}
                 <YStack space="$3">
                     <XStack ai="center" space="$2">
-                        <Clock size={20} color="#1976d2" />
+                        <Clock size={20} color="#4B0082" />
                         <Text fontWeight="600" color="#424242">Recent Sessions</Text>
                     </XStack>
 
@@ -145,12 +149,16 @@ export const RecentActivity = () => {
                             key={activity.id}
                             activity={activity}
                             onPress={() => {
-                                if (activity.type === 'flashcards') router.push(`/flashcardViewer?deckId=${activity.id}`)
-                                else router.push(`/documentResult?docId=${activity.id}`)
+                                if (activity.type === 'flashcards') {
+                                    router.push(`/flashcardViewer?deckId=${activity.id}`)
+                                } else {
+                                    router.push(`/documentResult?docId=${activity.id}`)
+                                }
                             }}
                         />
                     ))}
                 </YStack>
+
             </YStack>
         </ScrollView>
     )
@@ -175,17 +183,17 @@ const ActivityCard = ({ activity, onPress }: ActivityCardProps) => (
         shadowRadius={4}
     >
         <XStack space="$3" ai="center">
-            <YStack backgroundColor="#1976d220" p="$2" borderRadius={8} ai="center" jc="center" width={40} height={40}>
+            <YStack backgroundColor="#4B008220" p="$2" borderRadius={8} ai="center" jc="center" width={40} height={40}>
                 {activity.type === 'flashcards'
-                    ? <BookOpen size={20} color="#1976d2" />
-                    : <FileText size={20} color="#1976d2" />}
+                    ? <BookOpen size={20} color="#4B0082" />
+                    : <FileText size={20} color="#4B0082" />}
             </YStack>
             <YStack flex={1} space="$1">
                 <Text fontWeight="600" numberOfLines={1} color="#424242">{activity.title}</Text>
                 <XStack space="$2" ai="center">
                     <Clock size={14} color="#757575" />
                     <Text color="#757575" fontSize="$1">{activity.time} • {activity.duration}</Text>
-                    <Text ml="auto" color="#1976d2" fontWeight="600" fontSize="$1">{activity.progress}%</Text>
+                    <Text ml="auto" color="#4B0082" fontWeight="600" fontSize="$1">{activity.progress}%</Text>
                 </XStack>
             </YStack>
             <ChevronRight size={18} color="#757575" />

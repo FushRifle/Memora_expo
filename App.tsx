@@ -31,7 +31,7 @@ export default function App() {
       <TamaguiProvider config={config}>
         <ThemeProvider>
           <SafeAreaProvider>
-            <StatusBar style="light" />
+            <StatusBar translucent style="light" />
             <NavigationContainer>
               <MainNavigation />
             </NavigationContainer>

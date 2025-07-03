@@ -1,11 +1,11 @@
 import { YStack, XStack, Text, Stack } from 'tamagui'
 import { useRouter } from 'expo-router'
-import { useTheme } from 'react-native-paper'
 import { TouchableRipple } from 'react-native-paper'
 import {
     BookOpen, FileText, BarChart2, Mic,
     Book, CheckSquare, ChevronRight
 } from '@tamagui/lucide-icons'
+import { useTheme } from '@/styles/ThemeContext'
 
 const actionButtons = [
     { id: 'flashcards', label: 'Flashcards', icon: BookOpen, route: '/flashcards' },
@@ -18,7 +18,7 @@ const actionButtons = [
 
 export const QuickActions = () => {
     const router = useRouter()
-    const theme = useTheme()
+    const { colors } = useTheme()
     const renderActionRow = (actions: typeof actionButtons) => (
         <XStack space="$3">
             {actions.map(({ id, label, icon: Icon, route }) => (
@@ -26,7 +26,7 @@ export const QuickActions = () => {
                     key={id}
                     onPress={() => router.push(route)}
                     borderless
-                    rippleColor={theme.colors.primary}
+                    rippleColor={colors.primary}
                     style={{ flex: 1, borderRadius: 12 }}
                 >
                     <Stack
@@ -34,7 +34,7 @@ export const QuickActions = () => {
                         p="$2"
                         borderRadius={12}
                         borderWidth={1}
-                        borderColor={theme.colors.primary}
+                        borderColor={colors.primary}
                         flexDirection="row"
                         alignItems="center"
                         justifyContent="space-between"
@@ -50,7 +50,7 @@ export const QuickActions = () => {
                                 width={28}
                                 height={28}
                                 borderRadius={14}
-                                bg={theme.colors.primary}
+                                bg={colors.primary}
                                 justifyContent="center"
                                 alignItems="center"
                             >
@@ -59,13 +59,13 @@ export const QuickActions = () => {
                             <Text
                                 fontSize={13}
                                 fontWeight="600"
-                                color={theme.colors.primary}
+                                color={colors.primary}
                                 numberOfLines={1}
                             >
                                 {label}
                             </Text>
                         </XStack>
-                        <ChevronRight size={16} color={theme.colors.primary} />
+                        <ChevronRight size={16} color={colors.primary as any} />
                     </Stack>
                 </TouchableRipple>
             ))}
@@ -74,7 +74,7 @@ export const QuickActions = () => {
 
     return (
         <YStack space="$4" padding="$2">
-            <Text fontWeight="700" color={theme.colors.primary} fontSize={16}>
+            <Text fontWeight="700" color={colors.primary} fontSize={16}>
                 Quick Actions
             </Text>
 
