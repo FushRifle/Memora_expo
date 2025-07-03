@@ -1,7 +1,9 @@
-import { XStack, Text, Button, Stack, useTheme } from 'tamagui'
+import { XStack, Text, Button, Stack } from 'tamagui'
 import { ChevronRight } from '@tamagui/lucide-icons'
 import { ComponentType } from 'react'
 import { LinearGradient } from 'tamagui/linear-gradient'
+import { useTheme } from '@/styles/ThemeContext'
+import { color } from '@tamagui/themes'
 
 type IconProps = { size?: number | string; color?: string }
 
@@ -16,14 +18,14 @@ export function SettingsItem({
     onPress?: () => void
     children?: React.ReactNode
 }) {
-    const theme = useTheme()
+    const { colors } = useTheme()
 
     return (
         <Button
             unstyled
             onPress={onPress}
             padding="$4"
-            pressStyle={{ backgroundColor: theme.backgroundHover }}
+            pressStyle={{ backgroundColor: colors.background }}
         >
             <XStack alignItems="center" space="$3" flex={1}>
                 <LinearGradient
@@ -41,10 +43,10 @@ export function SettingsItem({
                 >
                     <Icon size={18} color="white" />
                 </LinearGradient>
-                <Text flex={1} fontWeight="500" color={theme.color}>
+                <Text flex={1} fontWeight="500" color='white'>
                     {label}
                 </Text>
-                {children || <ChevronRight size={20} color={theme.colorHover} />}
+                {children || <ChevronRight size={20} color='white' />}
             </XStack>
         </Button>
     )

@@ -1,7 +1,6 @@
 import { YStack, Text, Stack } from 'tamagui'
 import { MotiView } from 'moti'
 import { useTheme } from '@/styles/ThemeContext'
-import { color } from '@tamagui/themes'
 export function SettingsGroup({
     title,
     children,

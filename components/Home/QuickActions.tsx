@@ -81,7 +81,7 @@ export const QuickActions = ({ handleActionPress }: { handleActionPress: (screen
 
     return (
         <YStack space="$4" padding="$2">
-            <Text fontWeight="700" color={colors.primaryDark} fontSize={16}>
+            <Text fontWeight="700" color={colors.primaryLight} fontSize={16}>
                 Quick Actions
             </Text>
             {renderActionRow(actionButtons.slice(0, 2))}

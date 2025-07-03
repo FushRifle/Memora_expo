@@ -8,9 +8,11 @@ import { ActivityItem } from '@/components/Profile/Activity'
 import { MotiView } from 'moti'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import type { RootStackParamList } from '@/types'
+import { useTheme } from '@/styles/ThemeContext'
 
 export function ProfileScreen() {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+    const { colors } = useTheme()
 
     const stats = [
         { value: '245', label: 'Notes' },
@@ -25,7 +27,7 @@ export function ProfileScreen() {
     ]
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} backgroundColor={colors.background}>
             <YStack space="$5" padding="$4">
                 {/* ✅ Just use it directly now */}
                 <ProfileHeader />
@@ -55,7 +57,7 @@ export function ProfileScreen() {
                         animate={{ opacity: 1, translateY: 0 }}
                         transition={{ type: 'spring', delay: 150 }}
                     >
-                        <H4 fontWeight="700" fontSize="$6">
+                        <H4 fontWeight="700" fontSize="$6" color={colors.primary}>
                             Recent Activity
                         </H4>
                     </MotiView>

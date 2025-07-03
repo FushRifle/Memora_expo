@@ -1,6 +1,7 @@
 import { YStack, XStack, H3, Text, Image, Circle, Card } from 'tamagui'
 import { LinearGradient } from 'tamagui/linear-gradient'
 import { MotiView } from 'moti'
+import { useTheme } from '@/styles/ThemeContext'
 
 type StatItem = {
     value: string
@@ -8,6 +9,7 @@ type StatItem = {
 }
 
 export function ProfileCard({
+
     name,
     username,
     bio,
@@ -17,6 +19,8 @@ export function ProfileCard({
     bio: string
     stats: StatItem[]
 }) {
+    const { colors, isDark } = useTheme()
+
 
     const stats = [
         { value: '120', label: 'Study Hours' },
@@ -32,7 +36,7 @@ export function ProfileCard({
         >
             <Card elevate size="$4" bordered overflow="hidden" borderRadius="$6">
                 <LinearGradient
-                    colors={['#4B0082', '#42C6A1']}
+                    colors={isDark ? ['#1f1c2c', '#928DAB'] : ['#4B0082', '#42C6A1']}
                     start={[0, 0]}
                     end={[1, 1]}
                     padding="$4"

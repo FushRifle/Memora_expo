@@ -6,6 +6,7 @@ import {
 } from 'tamagui'
 import { ChevronRight, Clock, Users, Flag, BookOpen, Plus } from '@tamagui/lucide-icons'
 import { LinearGradient } from 'tamagui/linear-gradient'
+import { useTheme } from '@/styles/ThemeContext'
 
 // --- Locale Config ---
 LocaleConfig.locales['en'] = {
@@ -28,6 +29,7 @@ const EVENT_TYPES = [
 
 export const StudyCalendar = () => {
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
+    const { isDark } = useTheme()
 
     const studyEvents = {
         [selectedDate]: [
@@ -50,7 +52,7 @@ export const StudyCalendar = () => {
 
     return (
         <LinearGradient
-            colors={['#4B0082', '#42C6A1']}
+            colors={isDark ? ['#2a2a4f', '#555575'] : ['#4B0082', '#42C6A1']}
             start={[0, 0]}
             end={[1, 1]}
             borderRadius={16}
@@ -104,7 +106,7 @@ export const StudyCalendar = () => {
 
                 {/* Events */}
                 <YStack space="$2">
-                    {/* Date & view all */}
+                    {/* Date + view all */}
                     <XStack ai="center" jc="space-between" mb="$2">
                         <Text fontWeight="600" color="white">
                             {new Date(selectedDate).toLocaleDateString('en-US', {
@@ -120,7 +122,7 @@ export const StudyCalendar = () => {
                         </Button>
                     </XStack>
 
-                    {/* Event type filters */}
+                    {/* Filters */}
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} mb="$2">
                         <XStack space="$2">
                             {EVENT_TYPES.map((type) => (
@@ -142,7 +144,7 @@ export const StudyCalendar = () => {
                         </XStack>
                     </ScrollView>
 
-                    {/* Events list */}
+                    {/* Event list */}
                     <YStack space="$2">
                         {studyEvents[selectedDate]?.map((event) => (
                             <Card
@@ -159,7 +161,14 @@ export const StudyCalendar = () => {
                                 onPress={() => console.log('Open event details')}
                             >
                                 <XStack ai="center" space="$2">
-                                    <XStack ai="center" jc="center" borderRadius={8} backgroundColor={`${EVENT_TYPES.find(t => t.id === event.type)?.color || '#4B0082'}20`} width={32} height={32}>
+                                    <XStack
+                                        ai="center"
+                                        jc="center"
+                                        borderRadius={8}
+                                        backgroundColor={`${EVENT_TYPES.find(t => t.id === event.type)?.color || '#4B0082'}20`}
+                                        width={32}
+                                        height={32}
+                                    >
                                         {getEventIcon(event.type)}
                                     </XStack>
                                     <YStack flex={1}>

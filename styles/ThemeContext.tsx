@@ -88,7 +88,7 @@ const lightColors: ThemeColors = {
     onSecondaryContainer: '#00394f',   // Dark text on mint backgrounds
 
     accent: '#42C6A1',                 // Deeper mint / teal accent
-    background: '#F7F7F7',             // App background
+    background: '#F0F0F0',             // App background
     cardBackground: '#EBEBEB',         // Card background
     card: '#FFFFFF',
 
@@ -131,7 +131,7 @@ const darkColors: ThemeColors = {
 
     accent: '#52D6B1',                 // Minty accent
 
-    background: '#000000',             // App background
+    background: '#0D1117',             // App background
     surface: '#222222',                // Surfaces
     cardBackground: '#141414',
     card: '#1E1E1E',

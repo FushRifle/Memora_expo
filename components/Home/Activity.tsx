@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router'
 import { Dimensions } from 'react-native'
 import { LineChart, BarChart } from 'react-native-chart-kit'
 import { LinearGradient } from 'tamagui/linear-gradient'
+import { useTheme } from '@/styles/ThemeContext'
 
 const MOCK_ACTIVITIES = [
     { id: '1', title: 'Calculus Chapter 3 Review', time: '2h ago', type: 'flashcards', duration: '45 min', progress: 85 },
@@ -36,13 +37,14 @@ const PROGRESS_DATA = {
 }
 
 export const RecentActivity = () => {
+    const { isDark } = useTheme()
     const router = useRouter()
     const screenWidth = Dimensions.get('window').width - 40
     const [activeTab, setActiveTab] = useState<'study' | 'progress'>('study')
 
     return (
         <LinearGradient
-            colors={['#42C6A1', '#4B0082']}
+            colors={isDark ? ['#2a2a4f', '#555575'] : ['#42C6A1', '#4B0082']}
             start={[0, 0]}
             end={[1, 1]}
             borderRadius={16}
@@ -51,12 +53,11 @@ export const RecentActivity = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <YStack space="$4">
                     {/* Header */}
-                    <H4 color="white">Study Overview</H4>
+                    <H4 color="white" fontWeight="700">Study Overview</H4>
 
                     {/* Chart Card */}
                     <Card backgroundColor="white" borderRadius={12} shadowColor="#000" shadowOpacity={0.05} shadowRadius={4}>
                         <YStack p="$3" space="$2">
-
                             {/* Tabs Header */}
                             <XStack ai="center" space="$2">
                                 {activeTab === 'study'
@@ -91,8 +92,8 @@ export const RecentActivity = () => {
                                     width={screenWidth}
                                     height={200}
                                     fromZero
-                                    yAxisLabel=''
                                     yAxisSuffix=''
+                                    yAxisLabel=''
                                     chartConfig={{
                                         backgroundColor: 'white',
                                         backgroundGradientFrom: 'white',
@@ -132,34 +133,33 @@ export const RecentActivity = () => {
                         </YStack>
                     </Card>
 
-                    {/* Recent Activity 
-                    <YStack space="$3">
-                        <XStack ai="center" space="$2">
-                            <Clock size={20} color="white" />
-                            <Text fontWeight="600" color="white">Recent Sessions</Text>
-                        </XStack>
-
-                        {MOCK_ACTIVITIES.map((activity) => (
-                            <ActivityCard
-                                key={activity.id}
-                                activity={activity}
-                                onPress={() => {
-                                    if (activity.type === 'flashcards') {
-                                        router.push(`/flashcardViewer?deckId=${activity.id}`)
-                                    } else {
-                                        router.push(`/documentResult?docId=${activity.id}`)
-                                    }
-                                }}
-                            />
-                        ))}
-                    </YStack>
-                    */}
+                    {/* Optional: Recent Activity section (commented out until needed) */}
+                    {/*
+          <YStack space="$3">
+            <XStack ai="center" space="$2">
+              <Clock size={20} color="white" />
+              <Text fontWeight="600" color="white">Recent Sessions</Text>
+            </XStack>
+            {MOCK_ACTIVITIES.map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                activity={activity}
+                onPress={() => {
+                  if (activity.type === 'flashcards') {
+                    router.push(`/flashcardViewer?deckId=${activity.id}`)
+                  } else {
+                    router.push(`/documentResult?docId=${activity.id}`)
+                  }
+                }}
+              />
+            ))}
+          </YStack>
+          */}
                 </YStack>
             </ScrollView>
         </LinearGradient>
     )
 }
-
 type ActivityCardProps = {
     activity: typeof MOCK_ACTIVITIES[0]
     onPress: () => void

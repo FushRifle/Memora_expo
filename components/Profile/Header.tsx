@@ -21,7 +21,7 @@ export function ProfileHeader() {
             transition={{ type: 'spring', delay: 100 }}
         >
             <XStack justifyContent="space-between" alignItems="center" mt="$5">
-                <H4 fontWeight="800" color={colors.primaryDark}>
+                <H4 fontWeight="800" color={colors.primary}>
                     Profile
                 </H4>
                 <Button
@@ -33,9 +33,9 @@ export function ProfileHeader() {
                 >
                     <Stack
                         padding="$2.5"
-                        backgroundColor={colors.primaryDark}
+                        backgroundColor={colors.primary}
                         borderRadius="$10"
-                        shadowColor={colors.primaryDark}
+                        shadowColor={colors.primary}
                         shadowRadius={6}
                         shadowOpacity={0.15}
                         shadowOffset={{ width: 0, height: 3 }}

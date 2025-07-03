@@ -45,7 +45,7 @@ const featureSvgs = {
 
 export const HeroCard = () => {
     const router = useRouter()
-    const { colors } = useTheme()
+    const { isDark } = useTheme()
 
     const features = [
         { text: 'AI-powered explanations', svg: featureSvgs.ai },
@@ -70,7 +70,7 @@ export const HeroCard = () => {
             shadowOffset={{ width: 0, height: 6 }}
         >
             <LinearGradient
-                colors={['#4B0082', '#42C6A1']}
+                colors={isDark ? ['#2a2a4f', '#555575'] : ['#4B0082', '#42C6A1']}
                 start={[0, 0]}
                 end={[1, 1]}
                 padding="$4"
@@ -78,11 +78,11 @@ export const HeroCard = () => {
                 <TouchableRipple
                     onPress={handlePress}
                     borderless
-                    rippleColor='rgba(255,255,255,0.3)'
+                    rippleColor="rgba(255,255,255,0.3)"
                     style={{ borderRadius: 24 }}
                 >
                     <YStack space="$3">
-                        {/* Top section with brain */}
+                        {/* Top: brain + title */}
                         <XStack ai="center" space="$3">
                             <Stack
                                 width={90}
@@ -94,7 +94,6 @@ export const HeroCard = () => {
                             >
                                 <SvgXml xml={brainSvg} width={70} height={70} />
                             </Stack>
-
                             <YStack flex={1} space="$2">
                                 <H4 fontWeight="700" color="white" fontSize={20}>
                                     Your Learning Companion
@@ -125,7 +124,8 @@ export const HeroCard = () => {
                                 </XStack>
                             ))}
                         </YStack>
-                        {/* Action button */}
+
+                        {/* CTA button */}
                         <XStack jc="flex-end" mt="$2">
                             <Button
                                 backgroundColor="white"
