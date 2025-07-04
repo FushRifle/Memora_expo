@@ -10,6 +10,7 @@ export type RootStackParamList = {
     Profile: undefined
     Documents: undefined
     Notifications: undefined
+    Quiz: undefined
 }
 
 declare module 'tamagui' {

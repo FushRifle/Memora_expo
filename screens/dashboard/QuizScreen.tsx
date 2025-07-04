@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { YStack, XStack, Text, H2, H4, Button, Progress, Spinner, useTheme } from 'tamagui'
+import { YStack, XStack, Text, Button, Progress, Spinner, useTheme } from 'tamagui'
 import { QuizHeader } from '@/components/Quiz/Header'
 import { QuizQuestion } from '@/components/Quiz/Questions'
 import { QuizOptions } from '@/components/Quiz/Options'

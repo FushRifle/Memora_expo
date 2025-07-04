@@ -53,10 +53,11 @@ export function QuizResults({ score, total, onRestart }: QuizResultsProps) {
                         onRestart()
                     }}
                     bg={colors.primary}
-                    hoverStyle={{ backgroundColor: colors.primaryDark }}
+                    hoverStyle={{ bg: colors.primaryDark }}
                 >
                     <Text color="white">Try Again</Text>
                 </Button>
+
             </YStack>
         </MotiView>
     )

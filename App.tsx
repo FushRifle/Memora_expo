@@ -1,3 +1,4 @@
+import 'react-native-reanimated';
 import { TamaguiProvider, Theme } from 'tamagui'
 import config from './tamagui.config'
 import { useFonts } from 'expo-font'
@@ -9,6 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { MainNavigation } from '@/app/MainNavigation'
 import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from '@/styles/ThemeContext'
+
 
 SplashScreen.preventAutoHideAsync()
 

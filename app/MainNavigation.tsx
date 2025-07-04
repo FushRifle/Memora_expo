@@ -15,6 +15,7 @@ import { AIChatScreen } from '@/screens/dashboard/AIChatScreen'
 import DocumentResultScreen from '@/screens/dashboard/DocumentResultScreen'
 import { DocumentsScreen } from '@/screens/dashboard/DocumentAnalysisScreen'
 import CoursesScreen from '@/screens/dashboard/CourseScreen'
+import { QuizScreen } from '@/screens/dashboard/QuizScreen'
 
 // Settings & Profile screens
 import { ProfileScreen } from '@/screens/settings/ProfileScreen'
@@ -97,6 +98,7 @@ export function MainNavigation() {
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Documents" component={DocumentsScreen} />
             <Stack.Screen name="Notifications" component={NotificationScreen} />
+            <Stack.Screen name='Quiz' component={QuizScreen} />
         </Stack.Navigator>
     )
 }

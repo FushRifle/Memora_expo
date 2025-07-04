@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Memora_expo",
-    "slug": "Memora_expo",
+    "name": "Memora",
+    "slug": "Memora",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
