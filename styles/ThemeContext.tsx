@@ -79,7 +79,7 @@ export interface ThemeShadows {
 
 // --- Light Theme ---
 const lightColors: ThemeColors = {
-    primary: '#4B0082',                // Rich indigo
+    primary: '#00394f',                // Rich indigo
     primaryLight: '#a4c8de',           // Lighter indigo shade
     primaryDark: '#3A006B',            // Darker indigo
 
@@ -88,7 +88,7 @@ const lightColors: ThemeColors = {
     onSecondaryContainer: '#00394f',   // Dark text on mint backgrounds
 
     accent: '#42C6A1',                 // Deeper mint / teal accent
-    background: '#F0F0F0',             // App background
+    background: '#EBEBEB',             // App background
     cardBackground: '#EBEBEB',         // Card background
     card: '#FFFFFF',
 

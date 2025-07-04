@@ -7,7 +7,8 @@ import { useRouter } from 'expo-router'
 import { TouchableRipple } from 'react-native-paper'
 import * as Haptics from 'expo-haptics'
 import { SvgXml } from 'react-native-svg'
-import { LinearGradient } from 'tamagui/linear-gradient'
+import { colors } from '@/styles/globalStyles'
+
 
 const brainSvg = `
 <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,10 +70,8 @@ export const HeroCard = () => {
             shadowRadius={10}
             shadowOffset={{ width: 0, height: 6 }}
         >
-            <LinearGradient
-                colors={isDark ? ['#2a2a4f', '#555575'] : ['#4B0082', '#42C6A1']}
-                start={[0, 0]}
-                end={[1, 1]}
+            <YStack
+                backgroundColor={isDark ? colors.secondary : colors.primary}
                 padding="$4"
             >
                 <TouchableRipple
@@ -142,7 +141,7 @@ export const HeroCard = () => {
                         </XStack>
                     </YStack>
                 </TouchableRipple>
-            </LinearGradient>
+            </YStack>
         </Card>
     )
 }

@@ -11,13 +11,14 @@ import { Menu, Search } from '@tamagui/lucide-icons'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import type { RootStackParamList } from '@/types'
 import { useTheme } from '@/styles/ThemeContext'
+import { colors } from '@/styles/globalStyles'
 
 const FloatingBadge = styled(Circle, {
     position: 'absolute',
-    top: -6,
+    top: 0,
     right: -6,
     backgroundColor: '$red10',
-    size: 22,
+    size: 18,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 100,
@@ -33,7 +34,7 @@ const ProfileImageContainer = styled(Stack, {
     borderRadius: 16,
     overflow: 'hidden',
     borderWidth: 2,
-    borderColor: '$primaryDarkDark',
+    borderColor: 'white',
     shadowColor: '$primaryDarkDark',
     shadowRadius: 6,
     shadowOpacity: 0.2,
@@ -100,11 +101,9 @@ export const HomeHeader = () => {
             shadowOffset={{ width: 0, height: 6 }}
             mt="$4"
         >
-            <LinearGradient
-                colors={isDark ? ['#1f1c2c', '#928DAB'] : ['#4B0082', '#42C6A1']}
-                start={[0, 0]}
-                end={[1, 1]}
+            <YStack
                 padding="$4"
+                backgroundColor={isDark ? colors.secondary : colors.primary}
             >
                 <YStack space="$4">
                     {/* Top row */}
@@ -133,23 +132,29 @@ export const HomeHeader = () => {
 
                         <XStack space="$3">
                             <Button unstyled onPress={handleNotificationPress}>
+                                {unreadCount > 0 && (
+                                    <MotiView from={{ scale: 0.5, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        transition={{ type: 'spring' }}
+                                    >
+                                        <FloatingBadge>
+                                            <Text color="white" fontSize="$1" fontWeight="900">{unreadCount}</Text>
+                                        </FloatingBadge>
+                                    </MotiView>
+                                )}
                                 <Stack position="relative">
                                     <ActionButton>
                                         <Feather name="bell" size={20} color="white" />
                                     </ActionButton>
-                                    {unreadCount > 0 && (
-                                        <MotiView from={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring' }}>
-                                            <FloatingBadge>
-                                                <Text color="white" fontSize="$1" fontWeight="900">{unreadCount}</Text>
-                                            </FloatingBadge>
-                                        </MotiView>
-                                    )}
+
                                 </Stack>
                             </Button>
 
-                            <Button unstyled onPress={handleSettingsPress}>
+                            <Button unstyled
+                                onPress={handleSettingsPress}>
                                 <ActionButton>
-                                    <Menu size={20} color="white" />
+                                    <Menu size={20}
+                                        color="white" />
                                 </ActionButton>
                             </Button>
                         </XStack>
@@ -178,7 +183,7 @@ export const HomeHeader = () => {
                             <Input
                                 flex={1}
                                 placeholder="Search notes, flashcards..."
-                                placeholderTextColor={isDark ? '#aaa' : '#ddd'}
+                                placeholderTextColor={isDark ? 'white' : '#ddd'}
                                 value={searchQuery}
                                 onChangeText={setSearchQuery}
                                 onFocus={() => setIsFocused(true)}
@@ -217,7 +222,7 @@ export const HomeHeader = () => {
                         </Button>
                     </XStack>
                 </YStack>
-            </LinearGradient>
+            </YStack>
         </Card>
     )
 }

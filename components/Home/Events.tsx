@@ -5,8 +5,8 @@ import {
     Button, H4, ScrollView
 } from 'tamagui'
 import { ChevronRight, Clock, Users, Flag, BookOpen, Plus } from '@tamagui/lucide-icons'
-import { LinearGradient } from 'tamagui/linear-gradient'
 import { useTheme } from '@/styles/ThemeContext'
+import { colors } from '@/styles/globalStyles'
 
 // --- Locale Config ---
 LocaleConfig.locales['en'] = {
@@ -51,12 +51,10 @@ export const StudyCalendar = () => {
     }
 
     return (
-        <LinearGradient
-            colors={isDark ? ['#2a2a4f', '#555575'] : ['#4B0082', '#42C6A1']}
-            start={[0, 0]}
-            end={[1, 1]}
-            borderRadius={16}
-            padding="$3"
+        <YStack
+            padding="$4"
+            backgroundColor={isDark ? colors.secondary : colors.primary}
+            borderRadius={10}
         >
             <YStack space="$3" mb="$4">
                 {/* Header */}
@@ -182,6 +180,6 @@ export const StudyCalendar = () => {
                     </YStack>
                 </YStack>
             </YStack>
-        </LinearGradient>
+        </YStack>
     )
 }

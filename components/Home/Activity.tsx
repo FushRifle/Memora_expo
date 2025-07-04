@@ -8,8 +8,8 @@ import {
 import { useRouter } from 'expo-router'
 import { Dimensions } from 'react-native'
 import { LineChart, BarChart } from 'react-native-chart-kit'
-import { LinearGradient } from 'tamagui/linear-gradient'
 import { useTheme } from '@/styles/ThemeContext'
+import { colors } from '@/styles/globalStyles'
 
 const MOCK_ACTIVITIES = [
     { id: '1', title: 'Calculus Chapter 3 Review', time: '2h ago', type: 'flashcards', duration: '45 min', progress: 85 },
@@ -43,10 +43,8 @@ export const RecentActivity = () => {
     const [activeTab, setActiveTab] = useState<'study' | 'progress'>('study')
 
     return (
-        <LinearGradient
-            colors={isDark ? ['#2a2a4f', '#555575'] : ['#42C6A1', '#4B0082']}
-            start={[0, 0]}
-            end={[1, 1]}
+        <YStack
+            backgroundColor={isDark ? colors.secondary : colors.primary}
             borderRadius={16}
             padding="$3"
         >
@@ -61,8 +59,8 @@ export const RecentActivity = () => {
                             {/* Tabs Header */}
                             <XStack ai="center" space="$2">
                                 {activeTab === 'study'
-                                    ? <BarChart2 size={20} color="#42C6A1" />
-                                    : <Activity size={20} color="#42C6A1" />}
+                                    ? <BarChart2 size={20} color={colors.primary} />
+                                    : <Activity size={20} color={colors.secondary} />}
                                 <Text fontWeight="600" color="#424242">
                                     {activeTab === 'study' ? 'Weekly Study Time' : 'Subject Progress'}
                                 </Text>
@@ -80,9 +78,9 @@ export const RecentActivity = () => {
                                         backgroundGradientFrom: 'white',
                                         backgroundGradientTo: 'white',
                                         decimalPlaces: 0,
-                                        color: () => '#42C6A1',
-                                        labelColor: () => '#757575',
-                                        propsForDots: { r: "4", strokeWidth: "2", stroke: "#42C6A1" }
+                                        color: () => colors.primary,
+                                        labelColor: () => colors.primary,
+                                        propsForDots: { r: "4", strokeWidth: "2", stroke: colors.secondary }
                                     }}
                                     style={{ marginVertical: 8, borderRadius: 12 }}
                                 />
@@ -99,8 +97,8 @@ export const RecentActivity = () => {
                                         backgroundGradientFrom: 'white',
                                         backgroundGradientTo: 'white',
                                         decimalPlaces: 0,
-                                        color: () => '#42C6A1',
-                                        labelColor: () => '#757575',
+                                        color: () => colors.secondary,
+                                        labelColor: () => colors.secondary,
                                         barPercentage: 0.5
                                     }}
                                     style={{ marginVertical: 8, borderRadius: 12 }}
@@ -111,23 +109,23 @@ export const RecentActivity = () => {
                             <XStack mt="$2" jc="space-around">
                                 <Button
                                     size="$2"
-                                    backgroundColor={activeTab === 'study' ? '#42C6A1' : 'white'}
+                                    backgroundColor={activeTab === 'study' ? colors.primary : 'white'}
                                     borderWidth={1}
-                                    borderColor="#42C6A1"
-                                    borderRadius={20}
+                                    borderColor="black"
+                                    borderRadius={10}
                                     onPress={() => setActiveTab('study')}
                                 >
-                                    <Text color={activeTab === 'study' ? 'white' : '#42C6A1'}>Weekly Study</Text>
+                                    <Text color={activeTab === 'study' ? 'white' : colors.primary}>Weekly Study</Text>
                                 </Button>
                                 <Button
                                     size="$2"
-                                    backgroundColor={activeTab === 'progress' ? '#42C6A1' : 'white'}
+                                    backgroundColor={activeTab === 'progress' ? colors.primary : 'white'}
                                     borderWidth={1}
-                                    borderColor="#42C6A1"
+                                    borderColor="black"
                                     borderRadius={20}
                                     onPress={() => setActiveTab('progress')}
                                 >
-                                    <Text color={activeTab === 'progress' ? 'white' : '#42C6A1'}>Progress</Text>
+                                    <Text color={activeTab === 'progress' ? 'white' : colors.primary}>Progress</Text>
                                 </Button>
                             </XStack>
                         </YStack>
@@ -157,7 +155,7 @@ export const RecentActivity = () => {
           */}
                 </YStack>
             </ScrollView>
-        </LinearGradient>
+        </YStack>
     )
 }
 type ActivityCardProps = {

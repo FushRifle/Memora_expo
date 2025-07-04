@@ -1,10 +1,9 @@
-// tamagui.config.ts
 import { createTamagui } from 'tamagui'
 import { createInterFont } from '@tamagui/font-inter'
 import { shorthands } from '@tamagui/shorthands'
 import { themes, tokens } from '@tamagui/themes'
+import animationDriver from '@tamagui/animations-react-native'
 
-// Only load the weights you actually use:
 const headingFont = createInterFont({
     size: {
         4: 14,
@@ -32,6 +31,7 @@ const bodyFont = createInterFont({
 })
 
 const config = createTamagui({
+    animationDriver,
     themes: {
         ...themes,
         memoradark: {
@@ -60,6 +60,7 @@ const config = createTamagui({
 })
 
 export type AppConfig = typeof config
+
 declare module 'tamagui' {
     interface TamaguiCustomConfig extends AppConfig { }
 }
