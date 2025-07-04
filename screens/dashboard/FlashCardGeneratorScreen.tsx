@@ -6,6 +6,7 @@ import { FlashcardForm } from '@/components/Flashcards/Form'
 import { FlashcardList } from '@/components/Flashcards/CardList'
 import { FlashcardPreview } from '@/components/Flashcards/CardPreview'
 import { FlashcardStudy } from '@/components/Flashcards/CardStudy'
+import { useTheme } from '@/styles/ThemeContext'
 
 export function FlashcardGeneratorScreen() {
     const [activeTab, setActiveTab] = useState('create')
@@ -15,6 +16,7 @@ export function FlashcardGeneratorScreen() {
     const [difficulty, setDifficulty] = useState('medium')
     const [flashcards, setFlashcards] = useState<any[]>([])
     const [isEditing, setIsEditing] = useState<string | null>(null)
+    const { isDark, colors } = useTheme()
 
     const addFlashcard = () => {
         if (question.trim() && answer.trim()) {
@@ -61,7 +63,7 @@ export function FlashcardGeneratorScreen() {
     }
 
     return (
-        <YStack flex={1} backgroundColor="#f5f5f5">
+        <YStack flex={1} backgroundColor={colors.background}>
             <FlashcardHeader />
             <FlashcardTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 

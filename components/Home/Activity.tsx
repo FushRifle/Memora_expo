@@ -47,6 +47,7 @@ export const RecentActivity = () => {
             backgroundColor={isDark ? colors.secondary : colors.primary}
             borderRadius={16}
             padding="$3"
+            flex={1}
         >
             <ScrollView showsVerticalScrollIndicator={false}>
                 <YStack space="$4">

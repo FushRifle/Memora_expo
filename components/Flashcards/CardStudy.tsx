@@ -1,10 +1,13 @@
 import { YStack, Text, Card, XStack, Button, Stack } from 'tamagui'
 import { FlipHorizontal, Shuffle } from '@tamagui/lucide-icons'
 import { useState } from 'react'
+import { useTheme } from '@/styles/ThemeContext'
+import { colors } from '@/styles/globalStyles'
 
 export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isFlipped, setIsFlipped] = useState(false)
+    const { isDark } = useTheme()
 
     const mockFlashcards = [
         { id: '1', question: 'What is the capital of France?', answer: 'Paris' },
@@ -15,7 +18,9 @@ export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
 
     return (
         <YStack space="$4" marginBottom="$9">
-            <Text fontWeight="700" fontSize={16} color="#1976d2">
+            <Text fontWeight="700" fontSize={16}
+                color={isDark ? 'white' : '#00394f'}
+            >
                 Study Mode
             </Text>
 
@@ -34,7 +39,7 @@ export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
                 }}
             >
                 <YStack space="$4" ai="center">
-                    <Text fontSize={16} fontWeight="700" color="#1976d2">
+                    <Text fontSize={16} fontWeight="700" color={isDark ? 'white' : '#00394f'}>
                         Flashcard {currentIndex + 1}/{flashcards.length || mockFlashcards.length}
                     </Text>
 
@@ -57,30 +62,30 @@ export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
                             shadowOffset: { width: 0, height: 2 },
                         }}
                     >
-                        <Text fontSize={18} textAlign="center" color="#0d47a1" fontWeight="600">
+                        <Text fontSize={18} textAlign="center" color={isDark ? 'white' : '#00394f'} fontWeight="600">
                             {isFlipped ? currentCard.answer : currentCard.question}
                         </Text>
                     </Card>
 
                     <XStack space="$3">
                         <Button
-                            icon={<Shuffle size={16} color="#1976d2" />}
+                            icon={<Shuffle size={16} color={isDark ? 'white' : '#00394f'} />}
                             borderWidth={1}
                             borderColor="#e0e0e0"
                             backgroundColor="white"
                             borderRadius={8}
                         >
-                            <Text color="#1976d2" fontWeight="600">Shuffle</Text>
+                            <Text color={isDark ? 'white' : '#00394f'} fontWeight="600">Shuffle</Text>
                         </Button>
                         <Button
-                            icon={<FlipHorizontal size={16} color="#1976d2" />}
+                            icon={<FlipHorizontal size={16} color={isDark ? 'white' : '#00394f'} />}
                             borderWidth={1}
                             borderColor="#e0e0e0"
                             backgroundColor="white"
                             borderRadius={8}
                             onPress={() => setIsFlipped(!isFlipped)}
                         >
-                            <Text color="#1976d2" fontWeight="600">Flip</Text>
+                            <Text color={isDark ? 'white' : '#00394f'} fontWeight="600">Flip</Text>
                         </Button>
                     </XStack>
 
@@ -104,7 +109,7 @@ export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
             </Card>
 
             <YStack space="$3" mt="$4">
-                <Text fontWeight="700" fontSize={15} color="#1976d2">
+                <Text fontWeight="700" fontSize={15} color={isDark ? 'white' : '#00394f'}>
                     Study Progress
                 </Text>
                 <Card
@@ -113,7 +118,7 @@ export const FlashcardStudy = ({ flashcards }: { flashcards: any[] }) => {
                     borderWidth={1}
                     borderColor="#e0e0e0"
                     borderRadius={10}
-                    elevation={1}
+                    elevation={10}
                     style={{
                         shadowColor: '#000',
                         shadowOpacity: 0.03,

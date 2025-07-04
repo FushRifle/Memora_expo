@@ -1,6 +1,8 @@
 import { YStack, Input, Button, XStack, Text, Card, Stack } from 'tamagui'
 import { Plus, Check, ChevronDown } from '@tamagui/lucide-icons'
 import { useState } from 'react'
+import { colors } from '@/styles/globalStyles'
+import { useTheme } from '@/styles/ThemeContext'
 
 export const FlashcardForm = ({
     question,
@@ -29,6 +31,7 @@ export const FlashcardForm = ({
     updateFlashcard: () => void
     resetForm: () => void
 }) => {
+    const { isDark } = useTheme()
     const [showCategories, setShowCategories] = useState(false)
     const categories = ['General', 'Math', 'Science', 'History', 'Language']
 
@@ -36,8 +39,6 @@ export const FlashcardForm = ({
         <Card
             bg="white"
             p="$4"
-            borderWidth={1}
-            borderColor="#e0e0e0"
             elevation={2}
             borderRadius={12}
             style={{
@@ -48,7 +49,7 @@ export const FlashcardForm = ({
             }}
         >
             <YStack space="$3">
-                <Text fontWeight="700" fontSize={16} color="#1976d2">
+                <Text fontWeight="700" fontSize={16} color={colors.primary}>
                     Flashcard Details
                 </Text>
 
@@ -58,7 +59,7 @@ export const FlashcardForm = ({
                     onChangeText={setQuestion}
                     backgroundColor="white"
                     borderWidth={1}
-                    borderColor="#e0e0e0"
+                    borderColor={isDark ? colors.primary : colors.primary}
                     borderRadius={8}
                     placeholderTextColor="#9e9e9e"
                 />
@@ -69,7 +70,7 @@ export const FlashcardForm = ({
                     onChangeText={setAnswer}
                     backgroundColor="white"
                     borderWidth={1}
-                    borderColor="#e0e0e0"
+                    borderColor={isDark ? colors.primary : colors.primary}
                     borderRadius={8}
                     placeholderTextColor="#9e9e9e"
                     multiline
@@ -84,7 +85,7 @@ export const FlashcardForm = ({
                         iconAfter={<ChevronDown size={16} />}
                         backgroundColor="white"
                         borderWidth={1}
-                        borderColor="#e0e0e0"
+                        borderColor={isDark ? colors.primary : colors.primary}
                         borderRadius={8}
                         jc="space-between"
                     >
@@ -121,11 +122,11 @@ export const FlashcardForm = ({
                                 flex={1}
                                 size="$2"
                                 borderRadius={8}
-                                backgroundColor={difficulty === level ? '#1976d2' : '#e3f2fd'}
+                                backgroundColor={difficulty === level ? colors.primary : colors.secondary}
                                 onPress={() => setDifficulty(level)}
                             >
                                 <Text
-                                    color={difficulty === level ? 'white' : '#1976d2'}
+                                    color={difficulty === level ? 'white' : 'white'}
                                     fontSize={12}
                                     fontWeight="600"
                                     textTransform="capitalize"
@@ -151,7 +152,7 @@ export const FlashcardForm = ({
                     )}
                     <Button
                         icon={isEditing ? <Check size={16} color="white" /> : <Plus size={16} color="white" />}
-                        backgroundColor="#1976d2"
+                        backgroundColor={colors.secondary}
                         borderRadius={8}
                         disabled={!question.trim() || !answer.trim()}
                         onPress={isEditing ? updateFlashcard : addFlashcard}

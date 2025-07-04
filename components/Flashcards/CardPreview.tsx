@@ -2,8 +2,11 @@ import { YStack, Text, Card, XStack, Button } from 'tamagui'
 import { FlipHorizontal, Shuffle } from '@tamagui/lucide-icons'
 import { TouchableRipple } from 'react-native-paper'
 import { useState } from 'react'
+import { useTheme } from '@/styles/ThemeContext'
+import { colors } from '@/styles/globalStyles'
 
 export const FlashcardPreview = () => {
+    const { isDark } = useTheme()
     const [isFlipped, setIsFlipped] = useState(false)
     const mockFlashcards = [
         { id: '1', question: 'What is the capital of France?', answer: 'Paris', category: 'Geography', difficulty: 'easy' },
@@ -12,7 +15,8 @@ export const FlashcardPreview = () => {
 
     return (
         <YStack space="$4" mt="$4">
-            <Text fontWeight="700" fontSize={16} color="#1976d2">
+            <Text fontWeight="700" fontSize={16} color={isDark ? 'white' : '#00394f'}
+            >
                 Flashcard Preview
             </Text>
 
@@ -30,10 +34,8 @@ export const FlashcardPreview = () => {
                         jc="center"
                         backgroundColor="white"
                         p="$5"
-                        borderWidth={1}
-                        borderColor="#e0e0e0"
+                        elevate
                         borderRadius={12}
-                        elevation={3}
                         style={{
                             shadowColor: '#000',
                             shadowOpacity: 0.05,
@@ -43,9 +45,11 @@ export const FlashcardPreview = () => {
                     >
                         <XStack space="$2" ai="center">
                             <FlipHorizontal size={20} color="#1976d2" />
-                            <Text color="#1976d2" fontWeight="600">Tap to flip</Text>
+                            <Text color={isDark ? 'white' : '#00394f'}
+                                fontWeight="600">Tap to flip</Text
+                            >
                         </XStack>
-                        <Text mt="$4" fontSize={18} textAlign="center" color="#212121">
+                        <Text mt="$4" fontSize={18} textAlign="center" color={isDark ? 'white' : '#00394f'}>
                             {isFlipped ? mockFlashcards[0].answer : mockFlashcards[0].question}
                         </Text>
                     </Card>
@@ -59,8 +63,9 @@ export const FlashcardPreview = () => {
                     borderColor="#e0e0e0"
                     backgroundColor="white"
                     borderRadius={8}
+                    elevate
                 >
-                    <Text color="#1976d2" fontWeight="600">Shuffle</Text>
+                    <Text color={isDark ? 'white' : '#00394f'} fontWeight="600">Shuffle</Text>
                 </Button>
             </XStack>
 

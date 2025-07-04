@@ -1,5 +1,7 @@
 import { YStack, Text, Card, XStack, Button } from 'tamagui'
 import { BookOpen, Edit3, Trash2 } from '@tamagui/lucide-icons'
+import { useTheme } from '@/styles/globalStyles'
+import { colors } from '@/styles/globalStyles'
 
 export const FlashcardList = ({
     flashcards,
@@ -10,6 +12,7 @@ export const FlashcardList = ({
     editFlashcard: (card: any) => void
     deleteFlashcard: (id: string) => void
 }) => {
+    const { isDark } = useTheme()
     return (
         <YStack space="$4" mt="$4">
             <Text fontWeight="700" fontSize={16} color="#1976d2">
@@ -71,12 +74,10 @@ export const FlashcardList = ({
                 </YStack>
             ) : (
                 <Card
-                    backgroundColor="#f5f5f5"
                     p="$4"
                     ai="center"
                     jc="center"
-                    borderWidth={1}
-                    borderColor="#e0e0e0"
+                    backgroundColor={isDark ? colors.secondary : colors.primary as any}
                     borderRadius={10}
                     elevation={1}
                     style={{
@@ -86,8 +87,8 @@ export const FlashcardList = ({
                         shadowOffset: { width: 0, height: 1 },
                     }}
                 >
-                    <BookOpen size={36} color="#9e9e9e" />
-                    <Text mt="$2" color="#616161" fontWeight="500">
+                    <BookOpen size={36} color="white" />
+                    <Text mt="$2" color="white" fontWeight="500">
                         No flashcards yet. Add your first one!
                     </Text>
                 </Card>

@@ -55,6 +55,7 @@ export const StudyCalendar = () => {
             padding="$4"
             backgroundColor={isDark ? colors.secondary : colors.primary}
             borderRadius={10}
+            flex={1}
         >
             <YStack space="$3" mb="$4">
                 {/* Header */}
