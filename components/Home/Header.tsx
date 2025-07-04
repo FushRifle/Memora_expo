@@ -73,7 +73,7 @@ export const HomeHeader = () => {
     }, [unreadCount])
 
     const handleProfilePress = () => navigation.navigate('Profile')
-    const handleNotificationPress = () => navigation.navigate('Notifications' as never)
+    const handleNotificationPress = () => navigation.navigate('Notifications')
     const handleSettingsPress = () => navigation.navigate('Settings')
 
     const handleSearchPress = () => {

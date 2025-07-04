@@ -19,6 +19,7 @@ import CoursesScreen from '@/screens/dashboard/CourseScreen'
 // Settings & Profile screens
 import { ProfileScreen } from '@/screens/settings/ProfileScreen'
 import { SettingsScreen } from '@/screens/settings/SettingScreen'
+import { NotificationScreen } from '@/screens/settings/NotificationScreen'
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -95,6 +96,7 @@ export function MainNavigation() {
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Documents" component={DocumentsScreen} />
+            <Stack.Screen name="Notifications" component={NotificationScreen} />
         </Stack.Navigator>
     )
 }

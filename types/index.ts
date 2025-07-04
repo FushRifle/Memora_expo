@@ -9,6 +9,7 @@ export type RootStackParamList = {
     Settings: undefined
     Profile: undefined
     Documents: undefined
+    Notifications: undefined
 }
 
 declare module 'tamagui' {
